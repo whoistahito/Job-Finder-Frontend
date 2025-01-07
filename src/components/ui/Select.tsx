@@ -37,7 +37,7 @@ export const Select: React.FC<SelectProps> = ({
                 <select
                     className={cn(
                         "w-full px-4 py-3 rounded-xl border border-gray-200",
-                        "bg-white/70 backdrop-blur-sm",
+                        "bg-white",
                         "transition-all duration-200",
                         "text-gray-900",
                         "focus:outline-none focus:ring-2 focus:ring-neon-pink/20 focus:border-neon-pink",
