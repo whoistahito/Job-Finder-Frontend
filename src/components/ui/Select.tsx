@@ -14,6 +14,7 @@ interface SelectProps extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>
     options: SelectOption[];
 }
 
+//TODO: adjust job type names to backend
 export const Select: React.FC<SelectProps> = ({
                                                   label,
                                                   icon: Icon,
