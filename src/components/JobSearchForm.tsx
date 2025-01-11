@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Briefcase, Mail, MapPin, Search} from 'lucide-react';
+import {Mail, MapPin, Search} from 'lucide-react';
 import {Input} from './ui/Input';
 import {Button} from './ui/Button';
 import {Select} from './ui/Select';
@@ -44,7 +44,7 @@ export const JobSearchForm: React.FC = () => {
           />
           <Select
               label="Job Type"
-              icon={Briefcase}
+              icon={null}
               value={jobType}
               onChange={(e) => setJobType(e.target.value)}
               required
