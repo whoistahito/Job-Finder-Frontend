@@ -30,7 +30,7 @@ export const JobSearchForm: React.FC = () => {
     setSuccess(null);
 
     try {
-      const response = await fetch('https://api.yourjobfinder.com/user', {
+      const response = await fetch('https://api.yourjobfinder.website/user', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
