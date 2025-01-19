@@ -5,7 +5,7 @@ import {Button} from './ui/Button';
 import {Select} from './ui/Select';
 
 interface FormData {
-  jobTitle: string;
+  position: string;
   jobType: string;
   location: string;
   email: string;
@@ -13,7 +13,7 @@ interface FormData {
 
 export const JobSearchForm: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
-    jobTitle: '',
+    position: '',
     jobType: '',
     location: '',
     email: '',
@@ -43,7 +43,7 @@ export const JobSearchForm: React.FC = () => {
       }
 
       setSuccess('Thank you! We will start searching for jobs matching your criteria.');
-      setFormData({jobTitle: '', jobType: '', location: '', email: ''});
+      setFormData({position: '', jobType: '', location: '', email: ''});
     } catch (err) {
       setError('An unexpected error occurred, please try again.');
     } finally {
@@ -81,8 +81,8 @@ export const JobSearchForm: React.FC = () => {
             label="What job are you looking for?"
             icon={Search}
             type="text"
-            value={formData.jobTitle}
-            onChange={handleInputChange('jobTitle')}
+            value={formData.position}
+            onChange={handleInputChange('position')}
             placeholder="e.g. Frontend Developer"
             required
           />
