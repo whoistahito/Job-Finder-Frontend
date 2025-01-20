@@ -45,6 +45,7 @@ export const JobSearchForm: React.FC = () => {
       setSuccess('Thank you! We will start searching for jobs matching your criteria.');
       setFormData({position: '', jobType: '', location: '', email: ''});
     } catch (err) {
+      console.error(err);
       setError('An unexpected error occurred, please try again.');
     } finally {
       setIsSubmitting(false);
