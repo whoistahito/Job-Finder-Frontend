@@ -4,6 +4,7 @@ import {Header} from './components/Header';
 import {JobSearchForm} from './components/JobSearchForm';
 import {Unsubscribe} from "./pages/Unsubscribe.tsx";
 import {UnsubscribeError} from "./pages/UnsubscribeError.tsx";
+import {UnsubscribeHandler} from "./pages/UnsubscribeHandler.tsx";
 
 function App() {
   return (
@@ -19,8 +20,9 @@ function App() {
     </main>
               }
           />
+          <Route path="/unsubscribe/process" element={<UnsubscribeHandler/>}/>
           <Route path="/unsubscribe" element={<Unsubscribe/>}/>
-          <Route path="/unsubscribeError" element={<UnsubscribeError/>}/>
+          <Route path="/unsubscribe/error" element={<UnsubscribeError/>}/>
       </Routes>
   );
 }
