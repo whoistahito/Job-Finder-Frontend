@@ -19,7 +19,7 @@ export const UnsubscribeHandler: React.FC = () => {
             }
 
             try {
-                const response = await fetch('https://yourjobfinder.website/user', {
+                const response = await fetch('https://api.yourjobfinder.website/user', {
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json',
