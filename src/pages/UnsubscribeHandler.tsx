@@ -14,7 +14,6 @@ export const UnsubscribeHandler: React.FC = () => {
             const position = searchParams.get('position');
 
             if (!email || !location || !position) {
-                setError('Missing required query parameters.');
                 navigate('/unsubscribe/error');
                 return;
             }
@@ -36,12 +35,10 @@ export const UnsubscribeHandler: React.FC = () => {
                 if (response.ok) {
                     navigate('/unsubscribe');
                 } else {
-                    const errorMessage = `Failed to unsubscribe. Server responded with status ${response.status}`;
-                    setError(errorMessage);
-                    console.error(errorMessage);
+                    throw new Error('Failed to unsubscribe');
                 }
             } catch (err) {
-                setError(err instanceof Error ? err.message : 'A network error occurred while trying to unsubscribe.');
+                setError(err instanceof Error ? err.message : 'An unexpected error occurred');
                 console.error(err);
                 // navigate('/unsubscribe/error');
             }
