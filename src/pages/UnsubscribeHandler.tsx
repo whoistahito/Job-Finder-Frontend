@@ -15,7 +15,7 @@ export const UnsubscribeHandler: React.FC = () => {
 
             if (!email || !location || !position) {
                 setError('Missing required query parameters.');
-                navigate('/unsubscribe/error');
+                // navigate('/unsubscribe/error');
                 return;
             }
 
@@ -49,7 +49,8 @@ export const UnsubscribeHandler: React.FC = () => {
 
         const timeoutId = setTimeout(() => {
             if (!error) {
-                navigate('/unsubscribe/error');
+                console.error("timed out");
+                // navigate('/unsubscribe/error');
             }
         }, 10000); // 10 second timeout
 
