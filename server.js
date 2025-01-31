@@ -1,11 +1,13 @@
 import express from 'express';
 import path from 'path';
+import cors from 'cors';
 import {fileURLToPath} from 'url';
 
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+app.use(cors());
 // Serve static files from the "dist" directory
 if (process.env.NODE_ENV === 'production') {
     app.use((req, res, next) => {
