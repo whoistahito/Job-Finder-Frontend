@@ -39,8 +39,7 @@ export const UnsubscribeHandler: React.FC = () => {
                 }
             } catch (err) {
                 setError(err instanceof Error ? err.message : 'An unexpected error occurred');
-                console.error(err);
-                // navigate('/unsubscribe/error');
+                navigate('/unsubscribe/error');
             }
         };
 
