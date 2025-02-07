@@ -5,6 +5,7 @@ import {JobSearchForm} from './components/JobSearchForm';
 import {Unsubscribe} from "./pages/Unsubscribe.tsx";
 import {UnsubscribeError} from "./pages/UnsubscribeError.tsx";
 import {UnsubscribeHandler} from "./pages/UnsubscribeHandler.tsx";
+import {Features} from "./components/Features";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <div className="max-w-4xl mx-auto px-4 py-16 md:py-24 space-y-12 md:space-y-16">
         <Header />
         <JobSearchForm />
+          <Features/>
       </div>
     </main>
               }
