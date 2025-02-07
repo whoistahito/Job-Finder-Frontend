@@ -1,5 +1,5 @@
 import React from 'react';
-import { Bot } from 'lucide-react';
+import {Bot} from 'lucide-react';
 
 export const Header: React.FC = () => {
   return (
@@ -15,8 +15,8 @@ export const Header: React.FC = () => {
         <span className="text-gray-900">You Check Your Emails</span>
       </h1>
       <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-        Let our AI-powered bot do the heavy lifting. Simply tell us what job you're looking for,
-        and we'll send the best matches straight to your inbox.
+          Our bot finds jobs that match your criteria and emails them to you every day.
+          Dont need to search for jobs anymore!
       </p>
     </div>
   );
