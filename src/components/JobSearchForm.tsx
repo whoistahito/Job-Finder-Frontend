@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {Mail, MapPin, Search} from 'lucide-react';
 import {Features} from "./Features.tsx";
 import {Input} from './ui/Input';
@@ -12,6 +12,11 @@ interface FormData {
   email: string;
 }
 
+interface Suggestion {
+    id: string;
+    text: string;
+}
+
 export const JobSearchForm: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
     position: '',
@@ -20,9 +25,103 @@ export const JobSearchForm: React.FC = () => {
     email: '',
   });
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState<string | null>(null);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+    const [success, setSuccess] = useState<string | null>(null);
+    const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
+    const [showSuggestions, setShowSuggestions] = useState(false);
+    const suggestionsRef = useRef<HTMLDivElement>(null);
+
+    // Replace with your actual TomTom API key
+    const TOMTOM_API_KEY = import.meta.env.TOMTOM_API;
+
+    useEffect(() => {
+        // Close suggestions when clicking outside
+        const handleClickOutside = (event: MouseEvent) => {
+            if (suggestionsRef.current && !suggestionsRef.current.contains(event.target as Node)) {
+                setShowSuggestions(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
+
+    const fetchSuggestions = async (query: string) => {
+        if (!query) {
+            setSuggestions([]);
+            return;
+        }
+
+        try {
+            const response = await fetch(
+                `https://api.tomtom.com/search/2/search/${encodeURIComponent(query)}.json?` +
+                `key=${TOMTOM_API_KEY}` +
+                `&typeahead=true` +
+                `&limit=7` + // Increased limit to show more results
+                `&entityType=Municipality,MunicipalitySubdivision,CountrySubdivision` // Include more location types
+            );
+
+            if (!response.ok) throw new Error('Failed to fetch suggestions');
+
+            const data = await response.json();
+            const formattedSuggestions = data.results
+                .filter((result: any) => result.address && result.address.municipality) // Ensure we have valid city data
+                .map((result: any) => {
+                    // Construct a readable address string
+                    const municipality = result.address.municipality;
+                    const region = result.address.countrySubdivision;
+                    const country = result.address.country;
+
+                    let text = municipality;
+                    if (region && region !== municipality) {
+                        text += `, ${region}`;
+                    }
+                    if (country) {
+                        text += `, ${country}`;
+                    }
+
+                    return {
+                        id: result.id,
+                        text: text
+                    };
+                })
+                .filter((suggestion: Suggestion, index: number, self: Suggestion[]) =>
+                    // Remove duplicates
+                    index === self.findIndex((s) => s.text === suggestion.text)
+                );
+
+            setSuggestions(formattedSuggestions);
+            setShowSuggestions(true);
+        } catch (err) {
+            console.error('Error fetching suggestions:', err);
+            setSuggestions([]);
+        }
+    };
+
+    // Debounce function to limit API calls
+    const debounce = (func: Function, wait: number) => {
+        let timeout: NodeJS.Timeout;
+        return (...args: any[]) => {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func(...args), wait);
+        };
+    };
+
+    const debouncedFetchSuggestions = debounce(fetchSuggestions, 300);
+
+    const handleLocationInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        setFormData(prev => ({...prev, location: value}));
+        debouncedFetchSuggestions(value);
+    };
+
+    const handleSuggestionClick = (suggestion: Suggestion) => {
+        setFormData(prev => ({...prev, location: suggestion.text}));
+        setShowSuggestions(false);
+    };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -139,15 +238,33 @@ export const JobSearchForm: React.FC = () => {
                                     {value: 'internship', label: 'Internship'},
                                 ]}
                             />
-                            <Input
-                                label="Location"
-                                icon={MapPin}
-                                type="text"
-                                value={formData.location}
-                                onChange={handleInputChange('location')}
-                                placeholder="e.g. Berlin, Germany"
-                                required
-                            />
+                            <div className="relative">
+                                <Input
+                                    label="Location"
+                                    icon={MapPin}
+                                    type="text"
+                                    value={formData.location}
+                                    onChange={handleLocationInput}
+                                    placeholder="e.g. Berlin, Germany"
+                                    required
+                                />
+                                {showSuggestions && suggestions.length > 0 && (
+                                    <div
+                                        ref={suggestionsRef}
+                                        className="absolute z-10 w-full bg-white mt-1 rounded-lg shadow-lg border border-gray-200 max-h-60 overflow-y-auto"
+                                    >
+                                        {suggestions.map((suggestion) => (
+                                            <div
+                                                key={suggestion.id}
+                                                className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-sm"
+                                                onClick={() => handleSuggestionClick(suggestion)}
+                                            >
+                                                {suggestion.text}
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
                             <Input
                                 label="Where should we send the job matches?"
                                 icon={Mail}
