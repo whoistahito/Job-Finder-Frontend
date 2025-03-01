@@ -33,6 +33,9 @@ export const JobSearchForm: React.FC = () => {
     const suggestionsRef = useRef<HTMLDivElement>(null);
 
     const TOMTOM_API_KEY = import.meta.env.TOMTOM_API;
+    if (!TOMTOM_API_KEY) {
+        console.error('VITE_TOMTOM_API environment variable is not set');
+    }
 
     useEffect(() => {
         // Close suggestions when clicking outside
