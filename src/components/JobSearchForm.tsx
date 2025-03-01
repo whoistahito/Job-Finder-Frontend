@@ -32,7 +32,7 @@ export const JobSearchForm: React.FC = () => {
     const [showSuggestions, setShowSuggestions] = useState(false);
     const suggestionsRef = useRef<HTMLDivElement>(null);
 
-    const TOMTOM_API_KEY = import.meta.env.TOMTOM_API;
+    const TOMTOM_API_KEY = import.meta.env.VITE_TOMTOM_API;
     if (!TOMTOM_API_KEY) {
         console.error('VITE_TOMTOM_API environment variable is not set');
     }
@@ -58,7 +58,6 @@ export const JobSearchForm: React.FC = () => {
         }
 
         try {
-            console.log(import.meta.env.TOMTOM_API)
             const response = await fetch(
                 `https://api.tomtom.com/search/2/search/${encodeURIComponent(query)}.json?` +
                 `key=${TOMTOM_API_KEY}` +
