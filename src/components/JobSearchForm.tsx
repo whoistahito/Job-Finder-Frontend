@@ -62,7 +62,7 @@ export const JobSearchForm: React.FC = () => {
                 `https://api.tomtom.com/search/2/search/${encodeURIComponent(query)}.json?` +
                 `key=${TOMTOM_API_KEY}` +
                 `&typeahead=true` +
-                `&limit=7` + // Increased limit to show more results
+                `&limit=4` +
                 `&entityType=Municipality,MunicipalitySubdivision,CountrySubdivision` // Include more location types
             );
 
