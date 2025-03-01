@@ -32,7 +32,6 @@ export const JobSearchForm: React.FC = () => {
     const [showSuggestions, setShowSuggestions] = useState(false);
     const suggestionsRef = useRef<HTMLDivElement>(null);
 
-    // Replace with your actual TomTom API key
     const TOMTOM_API_KEY = import.meta.env.TOMTOM_API;
 
     useEffect(() => {
@@ -56,6 +55,7 @@ export const JobSearchForm: React.FC = () => {
         }
 
         try {
+            console.log(import.meta.env.TOMTOM_API)
             const response = await fetch(
                 `https://api.tomtom.com/search/2/search/${encodeURIComponent(query)}.json?` +
                 `key=${TOMTOM_API_KEY}` +
