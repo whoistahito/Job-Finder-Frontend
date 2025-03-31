@@ -1,10 +1,12 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {Mail, MapPin, Search} from 'lucide-react';
+import {Mail, MapPin, Search, X} from 'lucide-react';
 import {Features} from "./Features.tsx";
 import {Input} from './ui/Input';
 import {Button} from './ui/Button';
 import {Select} from './ui/Select';
 import {SVG} from "./ui/SVG.tsx";
+import {useNavigate} from 'react-router-dom'; // Add this import
+
 
 interface FormData {
   position: string;
@@ -19,16 +21,18 @@ interface Suggestion {
 }
 
 export const JobSearchForm: React.FC = () => {
-  const [formData, setFormData] = useState<FormData>({
-    position: '',
-    jobType: '',
-    location: '',
-    email: '',
-  });
-
+    const [formData, setFormData] = useState<FormData>({
+        position: '',
+        jobType: '',
+        location: '',
+        email: '',
+    });
+    const navigate = useNavigate();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [success, setSuccess] = useState<string | null>(null);
+    const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+    const [showErrorPopup, setShowErrorPopup] = useState(false);
     const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
     const [showSuggestions, setShowSuggestions] = useState(false);
     const suggestionsRef = useRef<HTMLDivElement>(null);
@@ -51,6 +55,28 @@ export const JobSearchForm: React.FC = () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
     }, []);
+
+    // Auto-hide the success popup after 5 seconds
+    useEffect(() => {
+        if (showSuccessPopup) {
+            const timer = setTimeout(() => {
+                setShowSuccessPopup(false);
+            }, 5000);
+
+            return () => clearTimeout(timer);
+        }
+    }, [showSuccessPopup]);
+
+    // Auto-hide the error popup after 5 seconds
+    useEffect(() => {
+        if (showErrorPopup) {
+            const timer = setTimeout(() => {
+                setShowErrorPopup(false);
+            }, 5000);
+
+            return () => clearTimeout(timer);
+        }
+    }, [showErrorPopup]);
 
     const fetchSuggestions = async (query: string) => {
         if (!query) {
@@ -126,46 +152,127 @@ export const JobSearchForm: React.FC = () => {
         setShowSuggestions(false);
     };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setError(null);
-    setSuccess(null);
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+        setError(null);
+        setSuccess(null);
+        setShowSuccessPopup(false);
+        setShowErrorPopup(false);
 
-    try {
-      const response = await fetch('https://api.yourjobfinder.website/user', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+        try {
+            const response = await fetch('https://api.example.website/user', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
 
-      if (!response.ok) {
-        throw new Error('Failed to submit job search, please try again.');
-      }
+            if (!response.ok) {
+                throw new Error('Failed to submit job search, please try again.');
+            }
 
-      setSuccess('Thank you! We will start searching for jobs matching your criteria.');
-      setFormData({position: '', jobType: '', location: '', email: ''});
-    } catch (err) {
-      console.error(err);
-      setError('An unexpected error occurred, please try again.');
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+            setSuccess('Thank you! We will start searching for jobs matching your criteria.');
+            setShowSuccessPopup(true);
+            setFormData({position: '', jobType: '', location: '', email: ''});
+        } catch (err) {
+            console.error(err);
+            setError('An unexpected error occurred, please try again.');
+            setShowErrorPopup(true);
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
 
-  const handleInputChange = (field: keyof FormData) => (
-      e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    setFormData((prev) => ({
-      ...prev,
-      [field]: e.target.value,
-    }));
-  };
+    const handleInputChange = (field: keyof FormData) => (
+        e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    ) => {
+        setFormData((prev) => ({
+            ...prev,
+            [field]: e.target.value,
+        }));
+    };
 
     return (
         <main className="min-h-screen bg-gradient-to-b from-indigo-50 to-white relative overflow-hidden">
+            {/* Success Popup */}
+            {showSuccessPopup && (
+                <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/30 backdrop-blur-sm">
+                    <div
+                        className="animate-bounce-in bg-gradient-to-r from-violet-600 via-indigo-600 to-violet-600 p-0.5 rounded-3xl shadow-xl shadow-neon-pink/30 max-w-md w-full mx-4">
+                        <div className="relative bg-white rounded-[calc(1.5rem-1px)] px-6 py-8">
+                            <button
+                                onClick={() => setShowSuccessPopup(false)}
+                                className="absolute top-3 right-3 text-gray-400 hover:text-gray-600 transition-colors"
+                            >
+                                <X size={20}/>
+                            </button>
+                            <div className="text-center space-y-4">
+                                <div className="text-6xl animate-bounce">
+                                    🎉
+                                </div>
+                                <h2 className="text-2xl font-bold bg-gradient-to-r from-violet-600 via-indigo-600 to-violet-600 bg-clip-text text-transparent">
+                                    Congratulations!
+                                </h2>
+                                <p className="text-gray-600">
+                                    Your job search request has been submitted successfully. We'll send you matching job
+                                    opportunities to your email soon!
+                                </p>
+                                <button
+                                    onClick={() => setShowSuccessPopup(false)}
+                                    className="mt-4 px-6 py-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white rounded-full hover:opacity-90 transition-opacity"
+                                >
+                                    Got it!
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Error Popup */}
+            {showErrorPopup && (
+                <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/30 backdrop-blur-sm">
+                    <div
+                        className="animate-bounce-in bg-gradient-to-r from-red-500 via-red-600 to-red-500 p-0.5 rounded-3xl shadow-xl shadow-red-500/30 max-w-md w-full mx-4">
+                        <div className="relative bg-white rounded-[calc(1.5rem-1px)] px-6 py-8">
+                            <button
+                                onClick={() => setShowErrorPopup(false)}
+                                className="absolute top-3 right-3 text-gray-400 hover:text-gray-600 transition-colors"
+                            >
+                                <X size={20}/>
+                            </button>
+                            <div className="text-center space-y-4">
+                                <div className="text-6xl animate-pulse">
+                                    ⚠️
+                                </div>
+                                <h2 className="text-2xl font-bold text-red-600">
+                                    Something went wrong
+                                </h2>
+                                <p className="text-gray-600">
+                                    {error || 'An unexpected error occurred. Please try again later.'}
+                                </p>
+                                <div className="flex justify-center space-x-3">
+                                    <button
+                                        onClick={() => setShowErrorPopup(false)}
+                                        className="mt-4 px-6 py-2 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-full hover:opacity-90 transition-opacity"
+                                    >
+                                        Try again
+                                    </button>
+                                    <button
+                                        onClick={() => navigate('/contact')}
+                                        className="mt-4 px-6 py-2 border border-gray-300 text-gray-700 rounded-full hover:bg-gray-50 transition-colors"
+                                    >
+                                        Contact support
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+
             <div
                 className="pointer-events-none absolute inset-x-0 top-0 w-full h-[30vh]  text-muted-foreground/20 opacity-50">
                 <SVG/>
@@ -189,16 +296,6 @@ export const JobSearchForm: React.FC = () => {
                     <div
                         className="relative bg-white/60 backdrop-blur-xl rounded-3xl shadow-xl shadow-neon-pink/10 p-8 md:p-10 border border-neon-pink/10"
                     >
-                        {error && (
-                            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl text-red-600">
-                                {error}
-                            </div>
-                        )}
-                        {success && (
-                            <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-xl text-green-600">
-                                {success}
-                            </div>
-                        )}
                         <form onSubmit={handleSubmit} className="space-y-6">
                             <Input
                                 label="What job are you looking for?"
