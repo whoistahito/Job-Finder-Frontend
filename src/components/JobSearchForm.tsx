@@ -161,7 +161,7 @@ export const JobSearchForm: React.FC = () => {
         setShowErrorPopup(false);
 
         try {
-            const response = await fetch('https://api.example.website/user', {
+            const response = await fetch('https://api.yourjobfinder.website/user', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
