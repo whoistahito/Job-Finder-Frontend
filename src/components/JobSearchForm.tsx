@@ -90,7 +90,8 @@ export const JobSearchForm: React.FC = () => {
                 `key=${TOMTOM_API_KEY}` +
                 `&typeahead=true` +
                 `&limit=4` +
-                `&entityType=Municipality,MunicipalitySubdivision,CountrySubdivision` // Include more location types
+                `&language=en-US` +
+                `&entityType=Municipality,Country`
             );
 
             if (!response.ok) throw new Error('Failed to fetch suggestions');
@@ -101,13 +102,9 @@ export const JobSearchForm: React.FC = () => {
                 .map((result: any) => {
                     // Construct a readable address string
                     const municipality = result.address.municipality;
-                    const region = result.address.countrySubdivision;
                     const country = result.address.country;
 
                     let text = municipality;
-                    if (region && region !== municipality) {
-                        text += `, ${region}`;
-                    }
                     if (country) {
                         text += `, ${country}`;
                     }
@@ -245,7 +242,7 @@ export const JobSearchForm: React.FC = () => {
                             </button>
                             <div className="text-center space-y-4">
                                 <div className="text-6xl animate-pulse">
-                                    ⚠️
+                                    🤔
                                 </div>
                                 <h2 className="text-2xl font-bold text-red-600">
                                     Something went wrong
