@@ -171,8 +171,8 @@ export const TermsOfUse: React.FC = () => {
                             Contact Us
                         </h2>
                         <p className="text-gray-700">
-                            If you have any questions about these Terms of Use, please contact us at support@your job
-                            finder.com.
+                            If you have any questions about these Terms of Use, please contact us at
+                            your.job.finder.app@gmail.com
                         </p>
                     </div>
 
