@@ -12,15 +12,16 @@ interface SelectProps extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>
     icon?: LucideIcon;
     error?: string;
     options: SelectOption[];
+    onBlur?: () => void;
 }
 
-//TODO: adjust job type names to backend
 export const Select: React.FC<SelectProps> = ({
                                                   label,
                                                   icon: Icon,
                                                   error,
                                                   options,
                                                   className,
+                                                  onBlur,
                                                   ...props
                                               }) => {
     return (
@@ -47,6 +48,7 @@ export const Select: React.FC<SelectProps> = ({
                         error && "border-red-500 focus:ring-red-500/20 focus:border-red-500",
                         className
                     )}
+                    onBlur={onBlur}
                     {...props}
                 >
                     {options.map((option) => (
