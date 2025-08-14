@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
 import {Input} from './ui/Input';
 import {Button} from './ui/Button';
 import {Select} from './ui/Select';
@@ -28,6 +28,25 @@ export const JobSearchForm: React.FC = () => {
     handleBlur,
     touched
   } = useJobSearch();
+
+    const stackRef = useRef<HTMLDivElement | null>(null);
+
+    useEffect(() => {
+        if (!stackRef.current) return;
+        const cards = Array.from(stackRef.current.querySelectorAll('.stack-card')) as HTMLElement[];
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const el = entry.target as HTMLElement;
+                if (entry.isIntersecting) {
+                    el.classList.add('is-active');
+                } else {
+                    el.classList.remove('is-active');
+                }
+            });
+        }, {threshold: 0.55});
+        cards.forEach(c => observer.observe(c));
+        return () => observer.disconnect();
+    }, []);
 
   return (
       <main className="min-h-screen flex flex-col soft-ui">
@@ -113,23 +132,58 @@ export const JobSearchForm: React.FC = () => {
               </form>
                   </div>
                   <div id="how" className="mt-28 space-y-12">
-                      <div className="panel-muted p-10 md:p-14">
-                          <h2 className="text-3xl md:text-5xl font-outfit font-semibold tracking-tight text-gray-900 mb-10">How
-                              it works</h2>
-                          <div className="grid gap-10 md:grid-cols-4">
+                      {/* Scroll stack cards */}
+                      <div ref={stackRef} className="stack-wrapper">
+                          <div className="stack-spacer">
+                              <article className="stack-card" style={{'--i': 1} as React.CSSProperties}>
+                                  <h2>How it works</h2>
+                                  <div className="stack-line"/>
+                                  <div className="stack-grid">
                               {[
-                                  {t: 'Define', d: 'State what role and parameters matter.'},
-                                  {t: 'Monitor', d: 'We watch fresh postings continuously.'},
-                                  {t: 'Filter', d: 'We discard noise & tangential fits.'},
-                                  {t: 'Deliver', d: 'Only send when a match truly aligns.'}
+                                  {t: 'Define', d: 'Tell us the role & boundaries that matter.'},
+                                  {t: 'Monitor', d: 'We continuously watch credible sources.'},
+                                  {t: 'Filter', d: 'Noise & weak matches are removed upstream.'},
+                                  {t: 'Deliver', d: 'Only a concise email when a real fit appears.'},
                               ].map(s => (
-                                  <div key={s.t} className="space-y-3">
-                                      <div
-                                          className="inline-block w-9 h-9 rounded-full bg-gray-900 text-white text-sm font-medium flex items-center justify-center">{s.t[0]}</div>
-                                      <h3 className="text-sm font-medium tracking-wide uppercase text-gray-600">{s.t}</h3>
-                                      <p className="text-sm text-gray-700 leading-relaxed">{s.d}</p>
+                                  <div key={s.t} className="stack-grid-item">
+                                      <h3>{s.t}</h3>
+                                      <p>{s.d}</p>
                                   </div>
                               ))}
+                                  </div>
+                              </article>
+                              <article className="stack-card" style={{'--i': 2} as React.CSSProperties}>
+                                  <h2>Why us</h2>
+                                  <div className="stack-line"/>
+                                  <div className="stack-benefits">
+                                      {[
+                                          {
+                                              title: 'Your Privacy Matters',
+                                              desc: 'Your data stays private. We never sell or rent your personal information.'
+                                          },
+                                          {
+                                              title: 'AI‑Powered Matching',
+                                              desc: 'Semantics > keywords: We look at job titles and requirements to find a job that fits.'
+                                          },
+                                          {
+                                              title: 'Daily Email Updates',
+                                              desc: 'At most one clean email per day, No Spam or Ads.'
+                                          },
+                                          {
+                                              title: 'Easy Unsubscribe',
+                                              desc: 'Instant one-click unsubscribe in every email. Without any Questions.'
+                                          },
+                                      ].map((b, i) => (
+                                          <div key={b.title} className="stack-benefit">
+                                              <div className="stack-badge">{String(i + 1).padStart(2, '0')}</div>
+                                              <div>
+                                                  <h3>{b.title}</h3>
+                                                  <p>{b.desc}</p>
+                                              </div>
+                                          </div>
+                                      ))}
+                                  </div>
+                              </article>
                           </div>
                       </div>
                   </div>

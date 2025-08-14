@@ -108,6 +108,48 @@
         mask: radial-gradient(circle at 55% 50%, #000 0%, #000 35%, transparent 70%);
         opacity: .55;
     }
+
+    .trust-wrap {
+        @apply relative rounded-2xl border border-gray-400/60 bg-white overflow-hidden;
+    }
+
+    .trust-wrap:before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(#9f9ca8 0.75px, transparent 0.75px);
+        background-size: 16px 16px;
+        opacity: .35;
+        mask: linear-gradient(to bottom, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.55) 55%, transparent 90%);
+    }
+
+    .trust-inner {
+        @apply relative px-8 md:px-14 pt-14 pb-10 md:pb-14;
+    }
+
+    .trust-heading {
+        @apply font-outfit font-semibold tracking-[-0.02em] text-[clamp(2.75rem,6vw,5rem)] leading-none text-gray-900 mb-10;
+    }
+
+    .benefit-list {
+        @apply divide-y divide-gray-300/70 border-t border-b border-gray-300/70;
+    }
+
+    .benefit-item {
+        @apply flex flex-col md:flex-row md:items-start gap-6 py-8;
+    }
+
+    .benefit-badge {
+        @apply shrink-0 w-9 h-9 rounded-full bg-gray-900 text-white flex items-center justify-center text-sm font-medium tracking-wide;
+    }
+
+    .benefit-title {
+        @apply text-lg font-medium text-gray-900 leading-snug;
+    }
+
+    .benefit-desc {
+        @apply text-sm text-gray-600 leading-relaxed mt-2 max-w-md;
+    }
 }
 
 @layer utilities {
@@ -167,18 +209,17 @@
 
     .glass-ring {
         position: relative;
+        border-radius: 1.25rem;
     }
 
     .glass-ring:before {
         content: "";
         position: absolute;
         inset: 0;
+        border-radius: inherit;
+        pointer-events: none;
         padding: 1px;
-        border-radius: 1.25rem;
-        background: linear-gradient(135deg, rgba(99, 102, 241, 0.5), rgba(56, 189, 248, 0.4), rgba(255, 255, 255, 0.4));
-        -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-        -webkit-mask-composite: xor;
-        mask-composite: exclude;
+        background: linear-gradient(#ffffff, #ffffff) padding-box, linear-gradient(135deg, rgba(99, 102, 241, 0.55), rgba(56, 189, 248, 0.45), rgba(255, 255, 255, 0.6)) border-box;
     }
 
     .form-shell {
@@ -277,5 +318,95 @@
 
     .link-quiet:hover .arrow {
         transform: translate(2px, -2px);
+    }
+
+    .stack-section {
+        @apply mt-40 relative;
+    }
+
+    .stack-wrapper {
+        position: relative;
+    }
+
+    .stack-spacer {
+        position: relative;
+        height: 140vh;
+    }
+
+    .stack-card {
+        position: sticky;
+        top: 5rem;
+        border: 1px solid #c8c6cf;
+        background: #f5f4f8;
+        border-radius: 1.5rem;
+        padding: clamp(2.5rem, 4vw, 4rem) clamp(2rem, 4vw, 4rem);
+        display: flex;
+        flex-direction: column;
+        gap: 2.5rem;
+        --shift: calc(var(--i) * 28px);
+        transform: translateY(var(--shift)) scale(.96);
+        transition: transform .7s cubic-bezier(.22, .61, .36, 1), box-shadow .7s, background-color .7s, border-color .7s;
+        will-change: transform;
+    }
+
+    .stack-card.is-active {
+        transform: translateY(0) scale(1);
+        background: #ffffff;
+        border-color: #b5b3bc;
+        box-shadow: 0 12px 40px -8px rgba(0, 0, 0, 0.08);
+    }
+
+    .stack-card h2 {
+        font-family: Outfit, sans-serif;
+        font-weight: 500;
+        line-height: .9;
+        font-size: clamp(3rem, 7vw, 5.5rem);
+        letter-spacing: -0.02em;
+    }
+
+    .stack-card:not(.is-active) h2 {
+        opacity: .55;
+    }
+
+    .stack-line {
+        height: 1px;
+        width: 100%;
+        background: linear-gradient(to right, #b6b3bd, #d5d3d9);
+    }
+
+    .stack-grid {
+        @apply grid gap-10 md:grid-cols-4;
+    }
+
+    .stack-grid-item {
+        @apply space-y-3;
+    }
+
+    .stack-grid-item h3 {
+        @apply text-sm font-medium tracking-wide uppercase text-gray-600;
+    }
+
+    .stack-grid-item p {
+        @apply text-sm text-gray-700 leading-relaxed;
+    }
+
+    .stack-benefits {
+        @apply divide-y divide-gray-300/70;
+    }
+
+    .stack-benefit {
+        @apply flex flex-col md:flex-row md:items-start gap-6 py-8;
+    }
+
+    .stack-badge {
+        @apply shrink-0 w-9 h-9 rounded-full bg-gray-900 text-white flex items-center justify-center text-sm font-medium tracking-wide;
+    }
+
+    .stack-benefit h3 {
+        @apply text-lg font-medium text-gray-900 leading-snug;
+    }
+
+    .stack-benefit p {
+        @apply text-sm text-gray-600 leading-relaxed mt-2 max-w-md;
     }
 }
