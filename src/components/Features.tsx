@@ -3,43 +3,24 @@ import {Brain, Clock, Shield, XCircle} from 'lucide-react';
 
 export const Features: React.FC = () => {
     return (
-        <div className="mt-8">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <div
-                    className="bg-white/80 backdrop-blur-xl rounded-2xl p-4 border border-neon-pink/10 shadow-sm h-full">
-                    <div className="inline-flex items-center justify-center p-2 rounded-xl bg-blue-50 mb-2">
-                        <Shield className="w-6 h-6 text-blue-600"/>
+        <div className="mt-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                {[
+                    {icon: Shield, title: 'Privacy First', desc: 'We never sell or share your data.'},
+                    {icon: Brain, title: 'Smart Matching', desc: 'We parse roles to surface high-fit leads.'},
+                    {icon: Clock, title: 'Timely Updates', desc: 'Fresh opportunities delivered promptly.'},
+                    {icon: XCircle, title: 'One‑Click Opt Out', desc: 'Stop emails instantly—no friction.'}
+                ].map(({icon: Icon, title, desc}) => (
+                    <div key={title}
+                         className="group surface-card p-5 h-full transition-all duration-300 hover:shadow-[0_8px_24px_-6px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 flex flex-col">
+                        <div
+                            className="inline-flex items-center justify-center h-11 w-11 rounded-xl bg-gradient-to-br from-brand-50 to-white text-brand-600 mb-4 ring-1 ring-brand-100 group-hover:from-brand-100 group-hover:to-white">
+                            <Icon className="w-5 h-5"/>
+                        </div>
+                        <h3 className="font-medium text-gray-900 mb-1 text-sm tracking-tight">{title}</h3>
+                        <p className="text-xs text-gray-600 leading-relaxed flex-1">{desc}</p>
                     </div>
-                    <h3 className="font-semibold text-gray-700">Your Privacy Matters</h3>
-                    <p className="text-gray-600 text-sm">Your personal information is secure and never shared with
-                        third parties.
-                    </p>
-                </div>
-                <div
-                    className="bg-white/80 backdrop-blur-xl rounded-2xl p-4 border border-neon-pink/10 shadow-sm h-full">
-                    <div className="inline-flex items-center justify-center p-2 rounded-xl bg-blue-50 mb-2">
-                        <Brain className="w-6 h-6 text-blue-600"/>
-                    </div>
-                    <h3 className="font-semibold text-gray-700">AI-Powered Matching</h3>
-                    <p className="text-gray-600 text-sm">Our bot analyzes job titles and descriptions to find the best
-                        match.</p>
-                </div>
-                <div
-                    className="bg-white/80 backdrop-blur-xl rounded-2xl p-4 border border-neon-pink/10 shadow-sm h-full">
-                    <div className="inline-flex items-center justify-center p-2 rounded-xl bg-blue-50 mb-2">
-                        <Clock className="w-6 h-6 text-blue-600"/>
-                    </div>
-                    <h3 className="font-semibold text-gray-700">Daily Email Updates</h3>
-                    <p className="text-gray-600 text-sm">Receive job matches as they are published on a daily basis.</p>
-                </div>
-                <div
-                    className="bg-white/80 backdrop-blur-xl rounded-2xl p-4 border border-neon-pink/10 shadow-sm h-full">
-                    <div className="inline-flex items-center justify-center p-2 rounded-xl bg-blue-50 mb-2">
-                        <XCircle className="w-6 h-6 text-blue-600"/>
-                    </div>
-                    <h3 className="font-semibold text-gray-700">Easy Unsubscribe</h3>
-                    <p className="text-gray-600 text-sm">Unsubscribe with a single click, no hassle.</p>
-                </div>
+                ))}
             </div>
         </div>
     );

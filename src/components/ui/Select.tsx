@@ -13,6 +13,7 @@ interface SelectProps extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>
     error?: string;
     options: SelectOption[];
     onBlur?: () => void;
+    variant?: 'default' | 'minimal';
 }
 
 export const Select: React.FC<SelectProps> = ({
@@ -22,44 +23,51 @@ export const Select: React.FC<SelectProps> = ({
                                                   options,
                                                   className,
                                                   onBlur,
+                                                  variant = 'default',
                                                   ...props
                                               }) => {
+    const baseDefault = [
+        'w-full px-3 py-2 rounded-md border border-gray-200 bg-white/80 backdrop-blur-sm',
+        'text-sm text-gray-900 placeholder:text-gray-400', 'transition-colors duration-150',
+        'focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20', 'hover:border-gray-300'
+    ];
+    const baseMinimal = [
+        'w-full bg-transparent px-0 py-2 text-base',
+        'border-0 border-b border-gray-400/60 rounded-none',
+        'text-gray-900', 'focus:outline-none focus:ring-0 focus:border-gray-900', 'hover:border-gray-500'
+    ];
+    const errorClasses = variant === 'minimal'
+        ? 'border-b-red-500 focus:border-red-600'
+        : 'border-red-500 focus:border-red-500 focus:ring-red-500/20';
     return (
-        <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700">
+        <div className={variant === 'minimal' ? 'minimal-field space-y-1.5' : 'space-y-1.5'}>
+            <label className={variant === 'minimal'
+                ? 'block text-xs font-medium tracking-wide text-gray-500 uppercase'
+                : 'block text-xs font-medium tracking-wide text-gray-600 uppercase'}>
                 {label}
             </label>
-            <div className="relative group">
-                {Icon && (
+            <div className={variant === 'minimal' ? 'relative' : 'relative group'}>
+                {Icon && variant === 'default' && (
                     <div
-                        className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 transition-colors duration-200 group-focus-within:text-neon-pink">
-                        <Icon className="h-[18px] w-[18px] stroke-[2.5px]"/>
+                        className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 transition-colors duration-200 group-focus-within:text-brand-600">
+                        <Icon className="h-[18px] w-[18px] stroke-[2px]"/>
                     </div>
                 )}
                 <select
                     className={cn(
-                        "w-full px-4 py-3 rounded-xl border border-gray-200",
-                        "bg-white",
-                        "transition-all duration-200",
-                        "text-gray-900",
-                        "focus:outline-none focus:ring-2 focus:ring-neon-pink/20 focus:border-neon-pink",
-                        "hover:border-neon-pink/30",
-                        Icon && "pl-11",
-                        error && "border-red-500 focus:ring-red-500/20 focus:border-red-500",
+                        variant === 'default' ? baseDefault : baseMinimal,
+                        Icon && variant === 'default' && 'pl-10',
+                        error && errorClasses,
                         className
                     )}
                     onBlur={onBlur}
                     {...props}
                 >
-                    {options.map((option) => (
-                        <option key={option.value} value={option.value}>
-                            {option.label}
-                        </option>
-                    ))}
+                    {options.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
                 </select>
             </div>
             {error && (
-                <p className="text-sm text-red-500">{error}</p>
+                <p className="text-xs text-red-500">{error}</p>
             )}
         </div>
     );

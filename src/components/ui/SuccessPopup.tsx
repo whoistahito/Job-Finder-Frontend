@@ -10,32 +10,32 @@ export const SuccessPopup: React.FC<SuccessPopupProps> = ({show, onClose}) => {
     if (!show) return null;
 
     return (
-        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/30 backdrop-blur-sm">
-            <div
-                className="animate-bounce-in bg-gradient-to-r from-violet-600 via-indigo-600 to-violet-600 p-0.5 rounded-3xl shadow-xl shadow-neon-pink/30 max-w-md w-full mx-4">
-                <div className="relative bg-white rounded-[calc(1.5rem-1px)] px-6 py-8">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm p-4">
+            <div className="w-full max-w-sm animate-fade-in-up">
+                <div className="surface-card relative p-7 md:p-8">
                     <button
                         onClick={onClose}
-                        className="absolute top-3 right-3 text-gray-400 hover:text-gray-600 transition-colors"
+                        aria-label="Close"
+                        className="absolute top-3.5 right-3.5 inline-flex h-7 w-7 items-center justify-center rounded-md border border-gray-200 text-gray-400 hover:text-gray-600 hover:bg-white/70 transition"
                     >
-                        <X size={20}/>
+                        <X size={16}/>
                     </button>
-                    <div className="text-center space-y-4">
-                        <div className="text-6xl animate-bounce">
-                            🎉
+                    <div className="text-center space-y-5">
+                        <div
+                            className="mx-auto flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-brand-50 to-white border border-brand-100 text-brand-600 shadow-sm">
+                            <span className="text-2xl leading-none">✓</span>
                         </div>
-                        <h2 className="text-2xl font-bold bg-gradient-to-r from-violet-600 via-indigo-600 to-violet-600 bg-clip-text text-transparent">
-                            Congratulations!
-                        </h2>
-                        <p className="text-gray-600">
-                            Your job search request has been submitted successfully. We'll send you matching job
-                            opportunities to your email soon!
-                        </p>
+                        <div className="space-y-2">
+                            <h2 className="text-lg font-semibold tracking-tight text-gray-900">Subscription
+                                Confirmed</h2>
+                            <p className="text-sm text-gray-600 leading-relaxed">We will start sending you curated job
+                                matches. You can unsubscribe at any time.</p>
+                        </div>
                         <button
                             onClick={onClose}
-                            className="mt-4 px-6 py-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white rounded-full hover:opacity-90 transition-opacity"
+                            className="pill-btn bg-gray-900 text-white hover:bg-black transition-colors px-5 py-2.5 rounded-full text-sm font-medium"
                         >
-                            Got it!
+                            Got it
                         </button>
                     </div>
                 </div>

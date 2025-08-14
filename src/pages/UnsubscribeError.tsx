@@ -5,94 +5,57 @@ import {Link} from 'react-router-dom';
 
 export const UnsubscribeError: React.FC = () => {
     return (
-        <main className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-            <div className="w-full max-w-xl">
-                <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 text-center space-y-8">
-                    {/* Logo */}
-                    <div className="inline-flex items-center justify-center p-3 rounded-2xl bg-red-50 mb-2">
-                        <Bot className="w-8 h-8 text-red-600"/>
+        <main className="page-shell">
+            <div className="page-container max-w-xl">
+                <div className="flat-section text-center space-y-9">
+                    <div
+                        className="inline-flex items-center justify-center h-14 w-14 rounded-2xl bg-gradient-to-br from-white to-gray-50 border border-gray-200 shadow-sm">
+                        <Bot className="w-7 h-7 text-red-600"/>
                     </div>
-
-                    {/* Error Icon */}
                     <div className="flex justify-center">
-                        <div className="p-3 rounded-full bg-red-100">
-                            <AlertCircle className="w-8 h-8 text-red-600"/>
+                        <div
+                            className="h-12 w-12 rounded-full bg-red-50 border border-red-100 flex items-center justify-center">
+                            <AlertCircle className="w-6 h-6 text-red-600"/>
                         </div>
                     </div>
-
-                    {/* Main Content */}
                     <div className="space-y-4">
-                        <h1 className="font-outfit text-3xl font-bold text-gray-900">
-                            Unsubscribe Failed
-                        </h1>
-                        <p className="text-gray-600 text-lg">
-                            We encountered an issue while trying to unsubscribe your email address.
-                        </p>
+                        <h1 className="font-outfit text-3xl font-semibold tracking-tight text-gray-900">Unsubscribe
+                            Failed</h1>
+                        <p className="text-gray-600 text-base leading-relaxed">We encountered an issue while processing
+                            your request.</p>
                     </div>
-
-                    {/* Error Details */}
-                    <div className="bg-red-50 rounded-xl p-6 space-y-4">
-                        <Mail className="w-6 h-6 text-red-600 mx-auto mb-2"/>
-                        <div className="space-y-4">
-                            <p className="text-gray-700 font-medium">
-                                Here are a few things you can try:
-                            </p>
-                            <ul className="text-gray-600 text-left space-y-2">
-                                <li className="flex items-start gap-2">
-                                    <span className="font-medium">1.</span>
-                                    <span>Check if you're using the same email address you subscribed with</span>
-                                </li>
-                                <li className="flex items-start gap-2">
-                                    <span className="font-medium">2.</span>
-                                    <span>Try clicking the unsubscribe link from your email again</span>
-                                </li>
-                                <li className="flex items-start gap-2">
-                                    <span className="font-medium">3.</span>
-                                    <span>Contact our support team for immediate assistance</span>
-                                </li>
-                            </ul>
+                    <div className="surface-card p-6 text-left space-y-5">
+                        <div className="flex items-center gap-3">
+                            <Mail className="w-5 h-5 text-red-600"/>
+                            <p className="text-sm text-gray-700 font-medium">Try the following:</p>
                         </div>
+                        <ol className="list-decimal list-inside space-y-2 text-sm text-gray-600">
+                            <li>Confirm you used the subscribed email address</li>
+                            <li>Open the original unsubscribe link again</li>
+                            <li>Reach out for manual removal</li>
+                        </ol>
                     </div>
-
-                    {/* Support Options */}
-                    <div className="space-y-6 pt-4">
-                        <div className="space-y-4">
-                            <h2 className="font-outfit text-lg font-semibold text-gray-900">
-                                Need Help?
-                            </h2>
-                            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                                <a
-                                    href="mailto:your.job.finder.app@gmail.com"
-                                    className="inline-flex items-center justify-center gap-2 text-gray-600 hover:text-red-600 transition-colors"
-                                >
-                                    <MessageCircle className="w-5 h-5"/>
-                                    <span>Contact Support</span>
-                                </a>
-                            </div>
+                    <div className="space-y-6 pt-2">
+                        <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">Need Help?</h2>
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                            <a href="mailto:your.job.finder.app@gmail.com"
+                               className="inline-flex items-center justify-center gap-2 text-gray-600 hover:text-red-600 transition-colors">
+                                <MessageCircle className="w-5 h-5"/>
+                                <span>Contact Support</span>
+                            </a>
                         </div>
-
-                        {/* Return Button */}
-                        <div className="pt-4">
+                        <div className="pt-2">
                             <Link to="/">
-                                <Button
-                                    variant="secondary"
-                                    className="!w-auto mx-auto"
-                                >
+                                <Button variant="secondary" className="!w-auto mx-auto rounded-full px-6">
                                     <ArrowLeft className="w-4 h-4"/>
-                                    <span>Return to Homepage</span>
+                                    <span>Return</span>
                                 </Button>
                             </Link>
                         </div>
                     </div>
-
-                    {/* Footer Note */}
-                    <p className="text-sm text-gray-500 pt-4">
-                        If you continue experiencing issues, please email us at{' '}
-                        <a href="mailto:your.job.finder.app@gmail.com"
-                           className="text-red-600 hover:text-red-700 font-medium">
-                            support
-                        </a>
-                    </p>
+                    <p className="text-xs text-gray-500 pt-4">Still stuck? Email <a
+                        href="mailto:your.job.finder.app@gmail.com"
+                        className="text-red-600 hover:text-red-700 font-medium">support</a>.</p>
                 </div>
             </div>
         </main>

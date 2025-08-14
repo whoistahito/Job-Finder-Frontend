@@ -3,7 +3,7 @@ import {cn} from '../../utils/cn';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
-  variant?: 'primary' | 'secondary';
+    variant?: 'primary' | 'secondary' | 'dark';
   isLoading?: boolean;
 }
 
@@ -14,11 +14,12 @@ export const Button: React.FC<ButtonProps> = ({
   className, 
   ...props 
 }) => {
-  const baseStyles = "relative w-full px-6 py-3 rounded-xl font-medium transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-70";
+    const baseStyles = "relative w-full px-5 py-2.5 rounded-lg font-medium text-sm transition-colors duration-200 flex items-center justify-center gap-2 disabled:opacity-60 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-brand-500";
   const variants = {
-    primary: "bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-600/25 hover:shadow-indigo-600/40",
-    secondary: "bg-white text-gray-800 border border-gray-200 hover:border-gray-300 hover:bg-gray-50"
-  };
+      primary: "bg-brand-600 hover:bg-brand-700 text-white disabled:hover:bg-brand-600",
+      secondary: "bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-gray-300",
+      dark: "bg-gray-900 text-white hover:bg-black"
+  } as const;
 
   return (
     <button 
@@ -28,7 +29,8 @@ export const Button: React.FC<ButtonProps> = ({
     >
       {children}
       {isLoading && (
-        <span className="absolute right-4 animate-spin">⚬</span>
+          <span
+              className="absolute right-4 inline-block h-4 w-4 rounded-full border-2 border-white border-t-transparent animate-spin"/>
       )}
     </button>
   );

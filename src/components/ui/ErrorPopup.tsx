@@ -17,38 +17,39 @@ export const ErrorPopup: React.FC<ErrorPopupProps> = ({
     if (!show) return null;
 
     return (
-        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/30 backdrop-blur-sm">
-            <div
-                className="animate-bounce-in bg-gradient-to-r from-red-500 via-red-600 to-red-500 p-0.5 rounded-3xl shadow-xl shadow-red-500/30 max-w-md w-full mx-4">
-                <div className="relative bg-white rounded-[calc(1.5rem-1px)] px-6 py-8">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm">
+            <div className="animate-fade-in-up w-full max-w-sm mx-4">
+                <div className="relative rounded-lg border border-gray-200 bg-white p-6 shadow-lg">
                     <button
                         onClick={onClose}
+                        aria-label="Close"
                         className="absolute top-3 right-3 text-gray-400 hover:text-gray-600 transition-colors"
                     >
-                        <X size={20}/>
+                        <X size={18}/>
                     </button>
                     <div className="text-center space-y-4">
-                        <div className="text-6xl animate-pulse">
-                            🤔
+                        <div
+                            className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-red-50 text-red-600 ring-1 ring-red-100">
+                            <span className="text-2xl">!</span>
                         </div>
-                        <h2 className="text-2xl font-bold text-red-600">
-                            Something went wrong
+                        <h2 className="text-lg font-semibold text-gray-900">
+                            Submission Failed
                         </h2>
-                        <p className="text-gray-600">
-                            {error || 'An unexpected error occurred. Please try again later.'}
+                        <p className="text-sm text-gray-600 leading-relaxed">
+                            {error || 'An unexpected error occurred. Please try again.'}
                         </p>
-                        <div className="flex justify-center space-x-3">
+                        <div className="flex justify-center gap-3 pt-2">
                             <button
                                 onClick={onClose}
-                                className="mt-4 px-6 py-2 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-full hover:opacity-90 transition-opacity"
+                                className="inline-flex items-center justify-center rounded-md bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
                             >
-                                Try again
+                                Try Again
                             </button>
                             <button
                                 onClick={onContactSupport}
-                                className="mt-4 px-6 py-2 border border-gray-300 text-gray-700 rounded-full hover:bg-gray-50 transition-colors"
+                                className="inline-flex items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2"
                             >
-                                Contact support
+                                Contact Support
                             </button>
                         </div>
                     </div>
