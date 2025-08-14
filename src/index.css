@@ -150,6 +150,46 @@
     .benefit-desc {
         @apply text-sm text-gray-600 leading-relaxed mt-2 max-w-md;
     }
+
+    /* Remove old bridge panel styles (no longer used) */
+    /* .stack-bridge ... (removed) */
+    /* Slim CTA divider (between last card and footer) */
+    .stack-cta {
+        @apply relative max-w-6xl mx-auto w-full px-6;
+    }
+
+    .stack-cta-inner {
+        @apply flex flex-col md:flex-row md:items-end justify-between gap-10 md:gap-14;
+    }
+
+    .stack-cta-left {
+        @apply flex-1;
+    }
+
+    .stack-cta-title {
+        @apply font-outfit font-semibold tracking-tight text-[clamp(2.4rem,6vw,4.2rem)] leading-[0.95] text-gray-900;
+    }
+
+    .stack-cta-sub {
+        @apply mt-5 text-sm md:text-base leading-relaxed text-gray-600 max-w-xl;
+    }
+
+    .stack-cta-right {
+        @apply shrink-0 flex items-start md:items-end;
+    }
+
+    .stack-cta-primary {
+        @apply inline-flex items-center gap-2 px-9 py-4 rounded-full bg-gray-900 text-white text-sm md:text-base font-medium hover:bg-black transition-colors shadow-[0_4px_18px_-4px_rgba(0,0,0,0.25)];
+    }
+
+    /* Old classes retained for safety but can be removed if unused */
+    .stack-cta-actions {
+        display: none;
+    }
+
+    .stack-cta-btn {
+        display: none;
+    }
 }
 
 @layer utilities {
@@ -326,11 +366,15 @@
 
     .stack-wrapper {
         position: relative;
+        --stack-count: 2; /* number of sticky cards */
+        --stack-extra: 60vh; /* increased extra scroll room so last card releases before footer */
+        margin-bottom: 6rem; /* space before footer */
     }
 
     .stack-spacer {
         position: relative;
-        height: 140vh;
+        /* Use dynamic height if JS sets --stack-height, otherwise fallback */
+        height: var(--stack-height, calc(var(--stack-count) * 100vh + var(--stack-extra)));
     }
 
     .stack-card {
@@ -344,8 +388,8 @@
         flex-direction: column;
         gap: 2.5rem;
         --shift: calc(var(--i) * 28px);
-        transform: translateY(var(--shift)) scale(.96);
-        transition: transform .7s cubic-bezier(.22, .61, .36, 1), box-shadow .7s, background-color .7s, border-color .7s;
+        transform: translate3d(0, var(--shift), 0) scale(.965);
+        transition: transform .55s cubic-bezier(.22, .61, .36, 1), box-shadow .55s, background-color .55s, border-color .55s;
         will-change: transform;
     }
 
@@ -481,5 +525,16 @@
 
     .chip-toggle {
         @apply text-[11px] font-medium uppercase tracking-wide text-gray-600 hover:text-gray-900 transition-colors;
+    }
+
+    .stack-wrapper.release-stack .stack-card {
+        position: relative; /* stops sticking */
+        top: auto;
+        transform: none !important;
+        box-shadow: 0 4px 18px -6px rgba(0, 0, 0, .07); /* subtle settled shadow */
+    }
+
+    .stack-wrapper.release-stack .stack-card + .stack-card {
+        margin-top: 3rem;
     }
 }

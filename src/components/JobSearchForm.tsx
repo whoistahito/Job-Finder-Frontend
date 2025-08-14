@@ -6,6 +6,7 @@ import {SuccessPopup} from './ui/SuccessPopup';
 import {ErrorPopup} from './ui/ErrorPopup';
 import {LocationInput} from './ui/LocationInput';
 import {useJobSearch} from '../hooks/useJobSearch';
+import {Footer} from './Footer';
 
 export const JobSearchForm: React.FC = () => {
   const {
@@ -44,18 +45,35 @@ export const JobSearchForm: React.FC = () => {
     useEffect(() => {
         if (!stackRef.current) return;
         const cards = Array.from(stackRef.current.querySelectorAll('.stack-card')) as HTMLElement[];
+
+        // Dynamic height calculation so last card releases before footer without huge spacer
+        const computeHeight = () => {
+            const vh = window.innerHeight;
+            if (!cards.length) return;
+            const totalCardsHeight = cards.reduce((sum, c) => sum + c.offsetHeight, 0);
+            const firstHeight = cards[0].offsetHeight;
+            // Allow first card to stick for one viewport, then scroll through remaining content
+            const target = firstHeight + (totalCardsHeight - firstHeight) + (vh - firstHeight * 0.6);
+            stackRef.current?.style.setProperty('--stack-height', `${target}px`);
+        };
+        computeHeight();
+        const ro = new ResizeObserver(computeHeight);
+        cards.forEach(c => ro.observe(c));
+        window.addEventListener('resize', computeHeight);
+
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
+            entries.forEach((entry) => {
                 const el = entry.target as HTMLElement;
-                if (entry.isIntersecting) {
-                    el.classList.add('is-active');
-                } else {
-                    el.classList.remove('is-active');
-                }
+                if (entry.isIntersecting) el.classList.add('is-active'); else el.classList.remove('is-active');
             });
-        }, {threshold: 0.55});
+        }, {threshold: 0.55, rootMargin: '0px 0px -10% 0px'});
         cards.forEach(c => observer.observe(c));
-        return () => observer.disconnect();
+
+        return () => {
+            observer.disconnect();
+            ro.disconnect();
+            window.removeEventListener('resize', computeHeight);
+        };
     }, []);
 
   return (
@@ -262,12 +280,13 @@ export const JobSearchForm: React.FC = () => {
                                   <h2>How it works</h2>
                                   <div className="stack-line"/>
                                   <div className="stack-grid">
-                              {[
-                                  {t: 'Define', d: 'Tell us the role & boundaries that matter.'},
-                                  {t: 'Monitor', d: 'We continuously watch credible sources.'},
-                                  {t: 'Filter', d: 'Noise & weak matches are removed upstream.'},
-                                  {t: 'Deliver', d: 'Only a concise email when a real fit appears.'},
-                              ].map(s => (
+                                      {[{t: 'Define', d: 'Tell us the role & boundaries that matter.'}, {
+                                          t: 'Monitor',
+                                          d: 'We continuously watch credible sources.'
+                                      }, {t: 'Filter', d: 'Noise & weak matches are removed upstream.'}, {
+                                          t: 'Deliver',
+                                          d: 'Only a concise email when a real fit appears.'
+                                      }].map(s => (
                                   <div key={s.t} className="stack-grid-item">
                                       <h3>{s.t}</h3>
                                       <p>{s.d}</p>
@@ -279,24 +298,19 @@ export const JobSearchForm: React.FC = () => {
                                   <h2>Why us</h2>
                                   <div className="stack-line"/>
                                   <div className="stack-benefits">
-                                      {[
-                                          {
-                                              title: 'Your Privacy Matters',
-                                              desc: 'Your data stays private. We never sell or rent your personal information.'
-                                          },
-                                          {
-                                              title: 'AI‑Powered Matching',
-                                              desc: 'Semantics > keywords: We look at job titles and requirements to find a job that fits.'
-                                          },
-                                          {
-                                              title: 'Daily Email Updates',
-                                              desc: 'At most one clean email per day, No Spam or Ads.'
-                                          },
-                                          {
-                                              title: 'Easy Unsubscribe',
-                                              desc: 'Instant one-click unsubscribe in every email. Without any Questions.'
-                                          },
-                                      ].map((b, i) => (
+                                      {[{
+                                          title: 'Your Privacy Matters',
+                                          desc: 'Your data stays private. We never sell or rent your personal information.'
+                                      }, {
+                                          title: 'AI‑Powered Matching',
+                                          desc: 'Semantics > keywords: We look at job titles and requirements to find a job that fits.'
+                                      }, {
+                                          title: 'Daily Email Updates',
+                                          desc: 'At most one clean email per day, No Spam or Ads.'
+                                      }, {
+                                          title: 'Easy Unsubscribe',
+                                          desc: 'Instant one-click unsubscribe in every email. Without any Questions.'
+                                      }].map((b, i) => (
                                           <div key={b.title} className="stack-benefit">
                                               <div className="stack-badge">{String(i + 1).padStart(2, '0')}</div>
                                               <div>
@@ -309,17 +323,30 @@ export const JobSearchForm: React.FC = () => {
                               </article>
                           </div>
                       </div>
+                      {/* Slim CTA divider section */}
+                      <div className="stack-cta" aria-label="Call to action">
+                          <div className="stack-cta-inner">
+                              <div className="stack-cta-left">
+                                  <h2 className="stack-cta-title">Opportunities matched to your profile.</h2>
+                                  <p className="stack-cta-sub">We monitor multiple sources and notify you only when
+                                      positions aligned with your skills, preferences are posted. Adjust or unsubscribe
+                                      any time.</p>
+                              </div>
+                              <div className="stack-cta-right">
+                                  <button onClick={() => {
+                                      const el = document.getElementById('subscription-form');
+                                      if (el) el.scrollIntoView({behavior: 'smooth'});
+                                  }} className="stack-cta-primary" aria-label="Update your profile criteria">Update
+                                      profile criteria ↗
+                                  </button>
+                              </div>
+                          </div>
+                          <div className="stack-cta-divider"/>
+                      </div>
                   </div>
               </div>
           </div>
-          {/* Footer */}
-          <footer className="mt-auto text-center text-gray-500 py-10 border-t border-gray-300 bg-[#f5f4f8]">
-              <p className="text-sm">&copy; {new Date().getFullYear()} Your Job Finder</p>
-              <div className="flex justify-center space-x-5 mt-3 text-sm">
-                  <a href="/contact" className="hover:text-gray-700">Contact</a>
-                  <a href="/terms" className="hover:text-gray-700">Terms</a>
-          </div>
-        </footer>
+          <Footer/>
       </main>
   );
 };
