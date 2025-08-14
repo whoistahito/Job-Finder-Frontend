@@ -190,7 +190,7 @@ export const JobSearchForm: React.FC = () => {
                               </div>
                               {showSkillExamples && (
                                   <div className="example-chips" role="list" aria-label="Quick add skills">
-                                      {['React', 'TypeScript', 'Node.js', 'GraphQL', 'Docker', 'PostgreSQL'].map(ex => {
+                                      {['Project Management', 'Quality Assurance', 'CE Marking', 'Python', 'Risk Assessment', 'Regulatory Compliance'].map(ex => {
                                           const added = formData.skills.some(s => s.toLowerCase() === ex.toLowerCase());
                                           return (
                                               <button
@@ -221,7 +221,7 @@ export const JobSearchForm: React.FC = () => {
                                           className="text-[11px] text-red-500 ml-auto">{formErrors.education}</span>}
                                   </div>
                                   <p className="micro-hint" id="education-hint">Highest degree or relevant certification
-                                      (e.g. BSc Computer Science, AWS SA). Keep it concise.</p>
+                                      (e.g. BSc Computer Science). Keep it concise.</p>
                               </div>
                               <div className="token-field" aria-describedby="education-hint">
                                   {formData.education.map(entry => (
@@ -244,7 +244,7 @@ export const JobSearchForm: React.FC = () => {
                               </div>
                               {showEducationExamples && (
                                   <div className="example-chips" role="list" aria-label="Quick add education">
-                                      {['BSc Computer Science', 'MSc Data Science', 'AWS Solutions Architect', 'Google UX Certificate'].map(ex => {
+                                      {['BSc Computer Science', 'MSc Microbiology', 'IHK Certificate', 'SCP Certificate'].map(ex => {
                                           const added = formData.education.some(s => s.toLowerCase() === ex.toLowerCase());
                                           return (
                                               <button
