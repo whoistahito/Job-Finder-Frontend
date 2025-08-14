@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {Input} from './ui/Input';
 import {Button} from './ui/Button';
 import {Select} from './ui/Select';
@@ -26,8 +26,18 @@ export const JobSearchForm: React.FC = () => {
     handleSubmit,
     handleInputChange,
     handleBlur,
-    touched
+      touched,
+      addSkill,
+      removeSkill,
+      addEducation,
+      removeEducation,
+      handleSkillKeyDown,
+      handleEducationKeyDown
   } = useJobSearch();
+
+    // Local UI only state for progressive disclosure of quick-add chips
+    const [showSkillExamples, setShowSkillExamples] = useState(false);
+    const [showEducationExamples, setShowEducationExamples] = useState(false);
 
     const stackRef = useRef<HTMLDivElement | null>(null);
 
@@ -90,12 +100,14 @@ export const JobSearchForm: React.FC = () => {
               <div className="max-w-6xl mx-auto px-6">
                   <div className="panel p-10 md:p-14">
                       <form onSubmit={handleSubmit} className="form-grid">
+                          {/* Role */}
                           <div className="md:col-span-1">
                               <Input label="Role" variant="minimal" type="text" value={formData.position}
                                      onChange={handleInputChange('position')} onBlur={handleBlur('position')}
                                      placeholder="Frontend Developer" required
                                      error={touched.position ? formErrors.position : undefined}/>
                           </div>
+                          {/* Job Type */}
                           <div className="md:col-span-1">
                               <Select label="Job Type" variant="minimal" value={formData.jobType}
                                       onChange={handleInputChange('jobType')} onBlur={handleBlur('jobType')} required
@@ -108,6 +120,7 @@ export const JobSearchForm: React.FC = () => {
                                           label: 'Working Student'
                                       }, {value: 'internship', label: 'Internship'}]}/>
                           </div>
+                          {/* Location */}
                           <div className="md:col-span-1">
                               <LocationInput variant="minimal" value={formData.location} onChange={handleLocationInput}
                                              onBlur={handleBlur('location')} suggestions={suggestions}
@@ -115,12 +128,122 @@ export const JobSearchForm: React.FC = () => {
                                              onSuggestionClick={handleSuggestionClick}
                                              error={touched.location ? formErrors.location : undefined}/>
                           </div>
+                          {/* Email */}
                           <div className="md:col-span-1">
                               <Input label="Email" variant="minimal" type="email" value={formData.email}
                                      onChange={handleInputChange('email')} onBlur={handleBlur('email')}
                                      placeholder="you@domain.com" required
                                      error={touched.email ? formErrors.email : undefined}/>
                           </div>
+                          {/* Skills Token Field */}
+                          <div className="md:col-span-2 space-y-3">
+                              <div className="flex flex-col gap-1">
+                                  <div className="flex items-center gap-3 flex-wrap">
+                                      <label className="tag-meta" htmlFor="skills-input">Key Skills (up to 10)</label>
+                                      <button type="button" className="chip-toggle"
+                                              onClick={() => setShowSkillExamples(s => !s)}>
+                                          {showSkillExamples ? 'Hide quick adds' : 'Show quick adds'}
+                                      </button>
+                                      {formErrors.skills &&
+                                          <span className="text-[11px] text-red-500 ml-auto">{formErrors.skills}</span>}
+                                  </div>
+                                  <p className="micro-hint" id="skills-hint">Add core technologies & tools (e.g. React,
+                                      TypeScript, PostgreSQL). Avoid soft skills.</p>
+                              </div>
+                              <div className={"token-field " + (touched.skills ? '' : '')}
+                                   aria-describedby="skills-hint">
+                                  {formData.skills.map(skill => (
+                                      <span key={skill} className="tag-badge">
+                        {skill}
+                                          <button type="button" aria-label={`Remove ${skill}`}
+                                                  onClick={() => removeSkill(skill)}>&times;</button>
+                      </span>
+                                  ))}
+                                  {formData.skills.length < 10 && (
+                                      <input
+                                          id="skills-input"
+                                          type="text"
+                                          aria-label="Add skill"
+                                          placeholder={formData.skills.length === 0 ? 'Type a skill & hit Enter' : 'Add another skill'}
+                                          onKeyDown={handleSkillKeyDown}
+                                          className="tag-input"
+                                      />
+                                  )}
+                              </div>
+                              {showSkillExamples && (
+                                  <div className="example-chips" role="list" aria-label="Quick add skills">
+                                      {['React', 'TypeScript', 'Node.js', 'GraphQL', 'Docker', 'PostgreSQL'].map(ex => {
+                                          const added = formData.skills.some(s => s.toLowerCase() === ex.toLowerCase());
+                                          return (
+                                              <button
+                                                  type="button"
+                                                  key={ex}
+                                                  onClick={() => addSkill(ex)}
+                                                  disabled={added}
+                                                  className="example-chip"
+                                                  aria-pressed={added}
+                                                  role="listitem"
+                                              >{ex}</button>
+                                          );
+                                      })}
+                                  </div>
+                              )}
+                          </div>
+                          {/* Education Token Field */}
+                          <div className="md:col-span-2 space-y-3">
+                              <div className="flex flex-col gap-1">
+                                  <div className="flex items-center gap-3 flex-wrap">
+                                      <label className="tag-meta" htmlFor="education-input">Education / Certifications
+                                          (max 3)</label>
+                                      <button type="button" className="chip-toggle"
+                                              onClick={() => setShowEducationExamples(s => !s)}>
+                                          {showEducationExamples ? 'Hide quick adds' : 'Show quick adds'}
+                                      </button>
+                                      {formErrors.education && <span
+                                          className="text-[11px] text-red-500 ml-auto">{formErrors.education}</span>}
+                                  </div>
+                                  <p className="micro-hint" id="education-hint">Highest degree or relevant certification
+                                      (e.g. BSc Computer Science, AWS SA). Keep it concise.</p>
+                              </div>
+                              <div className="token-field" aria-describedby="education-hint">
+                                  {formData.education.map(entry => (
+                                      <span key={entry} className="tag-badge">
+                        {entry}
+                                          <button type="button" aria-label={`Remove ${entry}`}
+                                                  onClick={() => removeEducation(entry)}>&times;</button>
+                      </span>
+                                  ))}
+                                  {formData.education.length < 3 && (
+                                      <input
+                                          id="education-input"
+                                          type="text"
+                                          aria-label="Add education"
+                                          placeholder={formData.education.length === 0 ? 'Type & hit Enter' : 'Add another'}
+                                          onKeyDown={handleEducationKeyDown}
+                                          className="tag-input"
+                                      />
+                                  )}
+                              </div>
+                              {showEducationExamples && (
+                                  <div className="example-chips" role="list" aria-label="Quick add education">
+                                      {['BSc Computer Science', 'MSc Data Science', 'AWS Solutions Architect', 'Google UX Certificate'].map(ex => {
+                                          const added = formData.education.some(s => s.toLowerCase() === ex.toLowerCase());
+                                          return (
+                                              <button
+                                                  type="button"
+                                                  key={ex}
+                                                  onClick={() => addEducation(ex)}
+                                                  disabled={added}
+                                                  className="example-chip"
+                                                  aria-pressed={added}
+                                                  role="listitem"
+                                              >{ex}</button>
+                                          );
+                                      })}
+                                  </div>
+                              )}
+                          </div>
+                          {/* Submit */}
                           <div className="md:col-span-2 flex flex-col md:flex-row md:items-center gap-6 pt-4">
                               <Button type="submit" isLoading={isSubmitting}
                                       className="rounded-full !w-auto minimal-btn bg-gray-900 hover:bg-black px-10 py-3">

@@ -409,4 +409,77 @@
     .stack-benefit p {
         @apply text-sm text-gray-600 leading-relaxed mt-2 max-w-md;
     }
+
+    .token-field {
+        @apply flex flex-wrap items-center gap-2 rounded-xl bg-white border border-gray-300/70 px-3 py-2 min-h-[3.25rem];
+    }
+
+    .token-field.focused {
+        @apply ring-2 ring-gray-900/10 border-gray-400;
+    }
+
+    .tag-badge {
+        @apply inline-flex items-center gap-2 h-8 pl-3 pr-2 rounded-full bg-gray-900 text-white text-[11px] font-medium tracking-wide;
+    }
+
+    .tag-badge button {
+        @apply flex items-center justify-center w-4 h-4 rounded-full bg-white/15 hover:bg-white/25 text-white text-[10px] leading-none;
+    }
+
+    .tag-input {
+        @apply flex-1 min-w-[10ch] bg-transparent border-0 focus:outline-none focus:ring-0 text-sm placeholder:text-gray-400;
+    }
+
+    .tag-meta {
+        @apply text-[11px] tracking-wide uppercase text-gray-500;
+    }
+
+    .example-chips {
+        @apply flex flex-wrap gap-2 mt-3;
+    }
+
+    .example-chip {
+        @apply inline-flex items-center justify-center rounded-full text-[11px] font-medium transition-all select-none relative overflow-hidden;
+        min-width: 2.4rem; /* circle for short text */
+        padding: 0 .9rem; /* becomes pill when wider */
+        height: 2.15rem;
+        line-height: 1;
+        background: radial-gradient(circle at 30% 30%, #ffffff 0%, #f4f4f7 60%, #ececf1 100%);
+        box-shadow: 0 1px 0 0 #d5d4d9, 0 2px 4px -1px rgba(0, 0, 0, .08);
+        border: 1px solid #d3d2d8;
+        color: #4b4b55;
+    }
+
+    .example-chip:hover:not(:disabled) {
+        @apply text-gray-900;
+        background: radial-gradient(circle at 30% 30%, #ffffff 0%, #f7f7fa 70%, #f0f0f5 100%);
+        box-shadow: 0 2px 6px -1px rgba(0, 0, 0, .12);
+    }
+
+    .example-chip:active:not(:disabled) {
+        transform: translateY(1px);
+        box-shadow: 0 1px 3px -1px rgba(0, 0, 0, .25);
+    }
+
+    .example-chip[aria-pressed="true"], .example-chip:disabled {
+        background: linear-gradient(135deg, #222, #111);
+        color: #fff;
+        border-color: #111;
+        box-shadow: 0 2px 8px -2px rgba(0, 0, 0, .35);
+        cursor: default;
+    }
+
+    .example-chip:focus-visible {
+        outline: 2px solid #111;
+        outline-offset: 2px;
+    }
+
+    /* NEW micro copy + toggle styles */
+    .micro-hint {
+        @apply text-[11px] text-gray-500 leading-relaxed;
+    }
+
+    .chip-toggle {
+        @apply text-[11px] font-medium uppercase tracking-wide text-gray-600 hover:text-gray-900 transition-colors;
+    }
 }

@@ -6,6 +6,8 @@ export interface FormData {
     jobType: string;
     location: string;
     email: string;
+    skills: string[]; // new
+    education: string[]; // new
 }
 
 export interface FormErrors {
@@ -13,6 +15,8 @@ export interface FormErrors {
     jobType?: string;
     location?: string;
     email?: string;
+    skills?: string; // limit / validation
+    education?: string; // limit / validation
 }
 
 export interface Suggestion {
@@ -26,6 +30,8 @@ export const useJobSearch = () => {
         jobType: '',
         location: '',
         email: '',
+        skills: [],
+        education: []
     });
     const [formErrors, setFormErrors] = useState<FormErrors>({});
     const [touched, setTouched] = useState<Record<keyof FormData, boolean>>({
@@ -33,6 +39,8 @@ export const useJobSearch = () => {
         jobType: false,
         location: false,
         email: false,
+        skills: false,
+        education: false
     });
     const navigate = useNavigate();
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -50,11 +58,10 @@ export const useJobSearch = () => {
     }
 
     // Validation rules
-    const validateField = (field: keyof FormData, value: string): string | undefined => {
+    const validateField = (field: keyof FormData, value: any): string | undefined => {
         switch (field) {
             case 'position':
                 if (!value.trim()) return 'Job title is required';
-                if (/^\d+$/.test(value)) return 'Job title cannot contain only numbers';
                 if (value.length < 2) return 'Job title must be at least 2 characters';
                 if (value.length > 100) return 'Job title must be less than 100 characters';
                 return undefined;
@@ -65,7 +72,6 @@ export const useJobSearch = () => {
 
             case 'location':
                 if (!value.trim()) return 'Location is required';
-                if (/^\d+$/.test(value)) return 'Location cannot contain only numbers';
                 if (value.length < 2) return 'Location must be at least 2 characters';
                 if (value.length > 100) return 'Location must be less than 100 characters';
                 return undefined;
@@ -75,6 +81,13 @@ export const useJobSearch = () => {
                 // RFC 5322 compliant email regex
                 const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
                 if (!emailRegex.test(value)) return 'Please enter a valid email address';
+                return undefined;
+
+            case 'skills':
+                if (Array.isArray(value) && value.length > 10) return 'Maximum 10 skills';
+                return undefined;
+            case 'education':
+                if (Array.isArray(value) && value.length > 3) return 'Maximum 3 entries';
                 return undefined;
 
             default:
@@ -198,7 +211,7 @@ export const useJobSearch = () => {
 
     // Debounce function to limit API calls
     const debounce = (func: Function, wait: number) => {
-        let timeout: NodeJS.Timeout;
+        let timeout: ReturnType<typeof setTimeout>;
         return (...args: any[]) => {
             clearTimeout(timeout);
             timeout = setTimeout(() => func(...args), wait);
@@ -254,7 +267,9 @@ export const useJobSearch = () => {
             position: true,
             jobType: true,
             location: true,
-            email: true
+            email: true,
+            skills: true,
+            education: true
         });
 
         // Validate all fields before submission
@@ -285,13 +300,15 @@ export const useJobSearch = () => {
             setShowSuccessPopup(true);
 
             // Reset form
-            setFormData({position: '', jobType: '', location: '', email: ''});
+            setFormData({position: '', jobType: '', location: '', email: '', skills: [], education: []});
             setFormErrors({});
             setTouched({
                 position: false,
                 jobType: false,
                 location: false,
-                email: false
+                email: false,
+                skills: false,
+                education: false
             });
         } catch (err) {
             console.error(err);
@@ -332,6 +349,62 @@ export const useJobSearch = () => {
         }
     };
 
+    const addSkill = (raw: string) => {
+        const skill = raw.trim();
+        if (!skill) return;
+        setFormData(prev => {
+            if (prev.skills.length >= 10 || prev.skills.some(s => s.toLowerCase() === skill.toLowerCase())) return prev;
+            return {...prev, skills: [...prev.skills, skill]};
+        });
+        setFormErrors(prev => ({...prev, skills: undefined}));
+    };
+
+    const removeSkill = (skill: string) => {
+        setFormData(prev => ({...prev, skills: prev.skills.filter(s => s !== skill)}));
+    };
+
+    const addEducation = (raw: string) => {
+        const entry = raw.trim();
+        if (!entry) return;
+        setFormData(prev => {
+            if (prev.education.length >= 3 || prev.education.some(e => e.toLowerCase() === entry.toLowerCase())) return prev;
+            return {...prev, education: [...prev.education, entry]};
+        });
+        setFormErrors(prev => ({...prev, education: undefined}));
+    };
+
+    const removeEducation = (entry: string) => {
+        setFormData(prev => ({...prev, education: prev.education.filter(e => e !== entry)}));
+    };
+
+    const handleSkillKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (['Enter', 'Tab', ','].includes(e.key)) {
+            e.preventDefault();
+            const target = e.target as HTMLInputElement;
+            addSkill(target.value);
+            target.value = '';
+        } else if (e.key === 'Backspace') {
+            const target = e.target as HTMLInputElement;
+            if (!target.value && formData.skills.length) {
+                removeSkill(formData.skills[formData.skills.length - 1]);
+            }
+        }
+    };
+
+    const handleEducationKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (['Enter', 'Tab'].includes(e.key)) {
+            e.preventDefault();
+            const target = e.target as HTMLInputElement;
+            addEducation(target.value);
+            target.value = '';
+        } else if (e.key === 'Backspace') {
+            const target = e.target as HTMLInputElement;
+            if (!target.value && formData.education.length) {
+                removeEducation(formData.education[formData.education.length - 1]);
+            }
+        }
+    };
+
     return {
         formData,
         formErrors,
@@ -351,6 +424,12 @@ export const useJobSearch = () => {
         handleSubmit,
         handleInputChange,
         handleBlur,
-        touched
+        touched,
+        addSkill,
+        removeSkill,
+        addEducation,
+        removeEducation,
+        handleSkillKeyDown,
+        handleEducationKeyDown
     };
 };
