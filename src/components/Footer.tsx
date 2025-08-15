@@ -9,6 +9,7 @@ export const Footer: React.FC = () => {
                     className="flex flex-col md:flex-row md:items-center gap-4 md:gap-6 justify-between text-[13px] text-gray-700">
                     <p className="order-2 md:order-1">{new Date().getFullYear()} © Your Job Finder</p>
                     <nav className="flex flex-wrap items-center gap-x-8 gap-y-2 order-1 md:order-2">
+                        <Link to="/blog" className="hover:text-gray-900 transition-colors">Blog</Link>
                         <Link to="/terms" className="hover:text-gray-900 transition-colors">Terms & Conditions</Link>
                         <Link to="/terms" className="hover:text-gray-900 transition-colors">Privacy</Link>
                         <Link to="/contact" className="hover:text-gray-900 transition-colors">Contact</Link>
