@@ -22,14 +22,14 @@ const content = {
                 f: 'Tipp: Kurz und präzise anfragen; sag, worum es geht.'
             },
             {
-                t: '3. Mehrere Kanäle parallel',
-                b: 'Nutze Jobbörsen, stelle Alerts ein, versende Initiativbewerbungen und teste ähnliche Jobtitel. Alerts helfen, früh zu reagieren — oft wichtiger als perfekte Passung. Ziehe auch spezialisierte Suchdienste oder semantische Monitore (z. B. yourjobfinder) in Betracht, die Ergebnisse bündeln und dir nur passende Rollen anzeigen — das spart Zeit und schützt deinen Fokus fürs Bewerben.',
-                f: 'Tipp: Probiere verwandte Jobtitel, wenn nichts exakt passt, oder nutze einen Monitor, um Rauschen zu reduzieren.'
-            },
-            {
-                t: '4. Ziele & Routine festlegen',
+                t: '3. Ziele & Routine festlegen',
                 b: 'Lege Rolle, Branche und Region fest. Verwalte Bewerbungen in einer einfachen Liste und blocke täglich Zeit zum Bewerben und Nachfassen.',
                 f: 'Tipp: Lieber wenige, gute Bewerbungen pro Tag als Massenversand.'
+            },
+            {
+                t: '4. Mehrere Kanäle parallel',
+                b: 'Nutze Jobbörsen, stelle Alerts ein, versende Initiativbewerbungen und teste ähnliche Jobtitel. Alerts helfen, früh zu reagieren — oft wichtiger als perfekte Passung. Nutze auch spezialisierte Suchdienste (z. B. <a href="https://www.linkedin.com/help/linkedin/answer/a511279/job-alerts-on-linkedin?lang=de" target="_blank" rel="noopener noreferrer">Jobbenachrichtigungen auf LinkedIn</a> oder <a href="https://yourjobfinder.website" target="_blank" rel="noopener noreferrer">yourjobfinder</a>), die Ergebnisse bündeln und dir nur passende Rollen anzeigen — das spart Zeit.',
+                f: 'Tipp: Probiere verwandte Jobtitel, wenn nichts exakt passt, oder nutze einen Monitor, um Rauschen zu reduzieren.'
             },
             {
                 t: '5. Lernen & sichtbar bleiben',
@@ -100,14 +100,14 @@ const content = {
                 f: 'Tip: Keep outreach short and say exactly how you can help or why you fit.'
             },
             {
-                t: '3. Search on Several Channels',
-                b: 'Use job boards, set alerts, try speculative applications and test nearby job titles. Alerts help you apply early—often that matters more than a perfect fit. Consider also using a focused search engine or a semantic monitor (for example, yourjobfinder) that aggregates results and only surfaces roles that match your criteria—this saves time and preserves focus for applying.',
-                f: 'Tip: Try a couple of related job titles if nothing matches exactly, or use a focused monitor to reduce noise.'
-            },
-            {
-                t: '4. Set Clear Goals & Routines',
+                t: '3. Set Clear Goals & Routines',
                 b: 'Decide which role, industry and locations you want. Track applications in a simple list and block daily time for applying and follow-ups.',
                 f: 'Tip: Aim for a few high‑quality applications per day, not mass sending.'
+            },
+            {
+                t: '4. Search on Several Channels',
+                b: 'Set alerts, Apply early and test similar job titles. Alerts help you apply early—often that matters more than a perfect fit. Consider also using search engines (for example, <a href="https://www.linkedin.com/help/linkedin/answer/a511279/job-alerts-on-linkedin?lang=en" target="_blank" rel="noopener noreferrer">Job alerts on LinkedIn</a> or <a href="https://yourjobfinder.website" target="_blank" rel="noopener noreferrer">yourjobfinder</a>) that aggregate results and filter roles that match your criteria, this saves time daily.',
+                f: 'Tip: Try a couple of related job titles if nothing matches exactly, or use a focused monitor to reduce noise.'
             },
             {
                 t: '5. Learn & Show Activity',
