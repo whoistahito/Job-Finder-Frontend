@@ -13,43 +13,43 @@ const content = {
         tips: [
             {
                 t: '1. Lebenslauf & Bewerbung optimieren',
-                b: 'Aktualisiere deinen Lebenslauf regelmäßig und passe ihn <em>jeder</em> Stellenanzeige an. Übernimm Schlüsselwörter aus der Ausschreibung (ATS). Schreibe ein kurzes individuelles Anschreiben mit Motivation + Passung. Begrenze dich auf Relevantes und rahme Lücken über Weiterbildung oder Projekte.',
-                f: 'Tipp: Eine klare Fokus-Zeile oben steigert Merkfähigkeit.'
+                b: 'Halte den Lebenslauf aktuell und passe ihn für jede Stelle an. Übernimm wichtige Begriffe aus der Anzeige, konzentriere dich auf Relevantes und beginne mit einer kurzen Zeile, die dich zusammenfasst. Schreibe im Anschreiben kurz, warum du passt.',
+                f: 'Tipp: Eine kurze Fokus‑Zeile oben hilft beim Einprägen.'
             },
             {
-                t: '2. Netzwerken intensiv nutzen',
-                b: 'Bis zu 70% der Jobs laufen über Kontakte. Aktiviere Alumni, Ex-Kollegen, Communitys. Pflege dein Profil (LinkedIn / Xing), fordere kurze Informationsgespräche an und folge Zielunternehmen.',
-                f: 'Trick: Personalisiert + prägnant schreiben (Mehrwert, Fokus, Call-to-Action).'
+                t: '2. Netzwerken nutzen',
+                b: 'Kontaktiere ehemalige Kolleg:innen, Alumni und Leute bei Zielunternehmen. Bitte um 10–15‑minütige Gespräche und sei konkret – keine langen, ungenauen Nachrichten.',
+                f: 'Tipp: Kurz und präzise anfragen; sag, worum es geht.'
             },
             {
                 t: '3. Mehrere Kanäle parallel',
-                b: 'Nutze Portale (StepStone, Indeed, LinkedIn, BA), Initiativbewerbungen und themennahe Alternativtitel. Stelle Früh-Alerts ein und bewirb dich früh (unter den ersten 100).',
-                f: 'Trick: Synonyme & benachbarte Funktionsbereiche testen.'
+                b: 'Nutze Jobbörsen, stelle Alerts ein, versende Initiativbewerbungen und teste ähnliche Jobtitel. Alerts helfen, früh zu reagieren — oft wichtiger als perfekte Passung.',
+                f: 'Tipp: Probiere verwandte Jobtitel, wenn nichts exakt passt.'
             },
             {
-                t: '4. Ziele & Organisation',
-                b: 'Definiere Rolle, Branche, Region, Gehaltsband. Führe ein Board/Sheet für Status & Follow-ups. Plane tägliche Bewerbungs-Slots.',
-                f: 'Trick: 5–10 qualitativ gute Bewerbungen pro Tag statt Massen-Streuung.'
+                t: '4. Ziele & Routine festlegen',
+                b: 'Lege Rolle, Branche und Region fest. Verwalte Bewerbungen in einer einfachen Liste und blocke täglich Zeit zum Bewerben und Nachfassen.',
+                f: 'Tipp: Lieber wenige, gute Bewerbungen pro Tag als Massenversand.'
             },
             {
-                t: '5. Weiterbildung & Aktivität',
-                b: 'Kurse (Coursera, Udemy, mein-now.de) schließen Skill-Gaps & zeigen Lernbereitschaft. Projekte oder Ehrenamt halten dich sichtbar & liefern Gesprächsstoff.',
-                f: 'Trick: Wöchentlich ein sichtbares Mini-Resultat posten.'
+                t: '5. Lernen & sichtbar bleiben',
+                b: 'Mache kurze Kurse oder kleine Projekte, um Lücken zu schließen. Sichtbare Fortschritte helfen in Gesprächen und zeigen Engagement.',
+                f: 'Tipp: Teile jede Woche ein kleines Ergebnis (Projekt, Post oder Notiz).'
             },
             {
-                t: '6. Vorstellungsgespräche',
-                b: 'Übe häufige Fragen, sammle 4–6 Impact-Stories (Problem → Aktion → Ergebnis), kleide dich passend & sende eine Dankesnachricht (1 konkrete Referenz auf das Gespräch).',
-                f: 'Trick: Reverse-Fragen zeigen Analysefähigkeit & Priorisierung.'
+                t: '6. Auf Interviews vorbereiten',
+                b: 'Übe typische Fragen und bereite 4–6 kurze Erfolgsgeschichten vor (Problem → Aktion → Ergebnis). Sende nach dem Gespräch eine kurze Dankesnachricht mit einem konkreten Bezug.',
+                f: 'Tipp: Nutze konkrete Beispiele und, wenn möglich, Zahlen.'
             },
             {
                 t: '7. Mit Absagen umgehen',
-                b: 'Neutral annehmen, Lernpunkte extrahieren und weiter senden, während du wartest. Momentum ist ein eigenständiger Erfolgsfaktor.',
-                f: 'Trick: Standardisiertes Feedback-Template parat halten.'
+                b: 'Zieh aus Absagen Lernpunkte: Was würdest du ändern? Bleib dran und behalte einen gleichmäßigen Rhythmus.',
+                f: 'Tipp: Nutze eine kurze Feedback‑Checkliste, um schneller zu lernen.'
             },
             {
-                t: '8. Energie & Rhythmus',
-                b: 'Fokus-Blöcke vormittags für Outbound / Bewerbungen – Nachmittags Lernen & Projekte. Kurze Pausen verhindern kognitive Erosion.',
-                f: 'Trick: 2×45 Minuten Deep Work + sichtbare Pipeline (= Dopamin durch Fortschritt).'
+                t: '8. Energie schützen',
+                b: 'Mache Outbound‑Arbeit vormittags und Lernen/Projekte nachmittags. Kurze Pausen verhindern Erschöpfung.',
+                f: 'Tipp: Zwei fokussierte 45‑Minuten‑Blöcke pro Tag sind oft effektiv.'
             }
         ],
         studiesHeading: 'Was sagen die Studien?',
@@ -76,11 +76,11 @@ const content = {
         checklist: [
             'Fokus-Zeile + aktualisierter CV', '5–10 qualifizierte Bewerbungen heute', '3 neue Netzwerk-Kontakte aktiviert', 'Alerts sauber konfiguriert', 'Mindestens 1 Lernmodul / Projekt-Slice', '4 Impact-Stories formuliert', 'Monitoring automatisiert'
         ],
-        asideTitle: 'Weniger Rauschen. Mehr Momentum.',
-        asideBody: 'Manuell 20 Quellen scannen frisst Fokus. Ein schlanker semantischer Monitor, der nur echte, passende Rollen bündelt und dir höchstens eine prägnante E‑Mail pro Tag liefert, schafft kognitive Entlastung. So investierst du Energie dort, wo Rendite entsteht: Gespräche, Vorbereitung, Portfolio.',
+        asideTitle: 'Putting It All Together: Automate Your Search',
+        asideBody: 'Die Strategien helfen dir, deine Energie auf Aufgaben mit hoher Wirkung zu konzentrieren: deinen Lebenslauf anzupassen, Netzwerke zu aktivieren und dich auf Vorstellungsgespräche vorzubereiten. Das manuelle Verfolgen Dutzender von Jobbörsen kann jedoch diese Konzentration rauben. Der effektivste Ansatz ist es, die Technologie die schwere Arbeit machen zu lassen.',
         ctaPrimary: 'Profil aktualisieren ↗',
-        asideCTA: 'Kostenlos Kriterien schärfen ↗',
-        footerNote: 'Bleib konsequent – automatisiere wiederholbare Schritte, sobald sie standardisiert sind. Qualität × System × Entlastung.'
+        asideCTA: 'Du kannst beginnen, deine Jobsuche mit einem kostenlosen semantischen Monitor zu automatisieren',
+        footerNote: 'Indem du ein System einrichtest, das das Rauschen herausfiltert und nur relevante Rollen liefert, erhältst du dein Momentum für das, was wirklich zählt: den Job zu bekommen.'
     },
     en: {
         heroTitle: 'Find a Job Fast',
@@ -91,43 +91,43 @@ const content = {
         tips: [
             {
                 t: '1. Optimize CV & Application',
-                b: 'Keep your CV current and tailor it to <em>each</em> posting. Mirror keywords (ATS). Write a concise, specific cover note (motivation + fit). Limit to the relevant; frame gaps with learning or projects.',
-                f: 'Tip: A crisp positioning line at the top improves recall.'
+                b: 'Keep your CV up to date and tweak it for each job. Pull a few keywords from the posting, keep only relevant experience, and add a short line at the top that sums up who you are. For applications, write a brief note that explains why you fit.',
+                f: 'Tip: Start with one short positioning line at the top of your CV.'
             },
             {
-                t: '2. Leverage Networking Deeply',
-                b: 'Up to 70% of roles move through contacts. Activate alumni, ex‑colleagues, communities. Maintain LinkedIn / Xing, request short info chats and follow target companies.',
-                f: 'Trick: Personal, concise outreach (value, focus, soft CTA).'
+                t: '2. Leverage Networking',
+                b: 'Reach out to past colleagues, alumni and people at target companies. Ask for 10–15 minute info chats and be specific about what you want—don’t send long, vague messages.',
+                f: 'Tip: Keep outreach short and say exactly how you can help or why you fit.'
             },
             {
-                t: '3. Parallel Multi‑Channel Search',
-                b: 'Use boards (LinkedIn, Indeed, local agency), targeted speculative outreach and adjacent titles. Set early alerts; apply early (ideally in first 100).',
-                f: 'Trick: Test synonyms & adjacent function areas.'
+                t: '3. Search on Several Channels',
+                b: 'Use job boards, set alerts, try speculative applications and test nearby job titles. Alerts help you apply early—often that matters more than a perfect fit.',
+                f: 'Tip: Try a couple of related job titles if nothing matches exactly.'
             },
             {
-                t: '4. Goals & Organisation',
-                b: 'Define role, industry, geography, comp band. Track status + follow‑ups in a sheet/board. Block daily application time.',
-                f: 'Trick: 5–10 high‑quality applications per day beats mass blasting.'
+                t: '4. Set Clear Goals & Routines',
+                b: 'Decide which role, industry and locations you want. Track applications in a simple list and block daily time for applying and follow-ups.',
+                f: 'Tip: Aim for a few high‑quality applications per day, not mass sending.'
             },
             {
-                t: '5. Upskilling & Activity',
-                b: 'Courses (Coursera, Udemy, local platforms) close gaps & signal growth. Projects or volunteering keep you visible & fuel conversations.',
-                f: 'Trick: Ship one visible micro outcome weekly.'
+                t: '5. Learn & Show Activity',
+                b: 'Take short courses or build a tiny project to fill gaps. Even small, visible progress helps in conversations and shows you’re learning.',
+                f: 'Tip: Share one small outcome each week (project, post, or note).'
             },
             {
-                t: '6. Interview Preparation',
-                b: 'Rehearse common questions, prep 4–6 impact stories (Problem → Action → Result), dress context‑appropriate & send a thank‑you with one tailored reference.',
-                f: 'Trick: Reverse questions show analysis & priority thinking.'
+                t: '6. Prepare for Interviews',
+                b: 'Practice common questions and prepare 4–6 short success stories (problem → action → result). After an interview, send a concise thank-you that mentions one detail from the conversation.',
+                f: 'Tip: Use concrete examples with numbers or clear outcomes.'
             },
             {
-                t: '7. Handling Rejection',
-                b: 'Stay neutral, extract learning, keep sending while waiting. Momentum itself is a success driver.',
-                f: 'Trick: Use a small feedback template to lower friction.'
+                t: '7. Handle Rejection Constructively',
+                b: 'Treat rejections as learning: note what you’d change and keep applying. A steady rhythm beats occasional bursts.',
+                f: 'Tip: Keep a short feedback checklist to speed up learning.'
             },
             {
-                t: '8. Energy & Cadence',
-                b: 'AM deep blocks for outreach / applications – PM learning & projects. Short breaks prevent cognitive erosion.',
-                f: 'Trick: 2×45 min deep work + visible pipeline (progress dopamine).'
+                t: '8. Protect Your Energy',
+                b: 'Do focused outreach in the morning and learning or projects in the afternoon. Take short breaks to avoid burning out.',
+                f: 'Tip: Two focused 45‑minute sessions per day work well for many people.'
             }
         ],
         studiesHeading: 'What Research Shows',
@@ -154,11 +154,11 @@ const content = {
         checklist: [
             'Positioning line + updated CV', '5–10 qualified applications today', '3 new network contacts activated', 'Alerts tuned & noise reduced', 'At least 1 learning module / project slice', '4 impact stories articulated', 'Monitoring automated'
         ],
-        asideTitle: 'Less Noise. More Momentum.',
-        asideBody: 'Manual scanning across 20 sources drains focus. A lean semantic monitor that consolidates only real, relevant roles and sends at most one concise email per day frees cognition. You reinvest energy where ROI compounds: conversations, prep, portfolio.',
+        asideTitle: 'Putting It All Together: Automate Your Search',
+        asideBody: 'The strategies above help you focus your energy on high-impact tasks: tailoring your CV, networking, and preparing for interviews. Manually tracking dozens of job boards, however, can drain that focus. The most effective approach is to let technology do the heavy lifting.',
         ctaPrimary: 'Update profile ↗',
-        asideCTA: 'Refine criteria free ↗',
-        footerNote: 'Stay consistent—automate repeatable steps once standardized. Quality × System × Leverage.'
+        asideCTA: 'You can start automating your job search with a free semantic monitor',
+        footerNote: 'By setting up a system that filters out the noise and delivers only relevant roles, you preserve your momentum for what truly matters: landing the job.'
     }
 };
 
@@ -199,82 +199,80 @@ export const Blog: React.FC = () => {
             </section>
             {/* Article */}
             <div className="relative w-full -mt-16 pb-24">
-                <div className="max-w-6xl mx-auto px-6">
-                    <article className="panel p-8 md:p-14 space-y-14" aria-labelledby="article-title">
-                        <header className="space-y-6">
+                <div className="max-w-4xl mx-auto px-6">
+                    <article className="panel p-8 md:p-12 lg:p-16 space-y-16" aria-labelledby="article-title">
+                        <header className="space-y-6 text-center">
                             <h2 id="article-title"
                                 className="font-outfit text-3xl md:text-5xl font-semibold tracking-tight leading-[1.05] text-gray-900">{c.articleTitle}</h2>
-                            <p className="text-base md:text-lg leading-relaxed text-gray-700 max-w-3xl"
+                            <p className="text-base md:text-lg leading-relaxed text-gray-700 max-w-3xl mx-auto"
                                dangerouslySetInnerHTML={{__html: c.intro}}/>
                         </header>
-                        {/* Tips */}
-                        <section className="space-y-6" aria-labelledby="sec-tipps">
+
+                        {/* Tips Section */}
+                        <section className="space-y-10" aria-labelledby="sec-tipps">
                             <h3 id="sec-tipps"
-                                className="font-outfit text-2xl md:text-3xl font-semibold tracking-tight text-gray-900">{c.tipsHeading}</h3>
-                            <div className="grid md:grid-cols-2 gap-10">
-                                <div className="space-y-5">
-                                    {firstCol.map(item => (
-                                        <div key={item.t}>
-                                            <h4 className="text-sm font-medium tracking-wide uppercase text-gray-600 mb-2">{item.t}</h4>
-                                            <p className="text-sm md:text-base leading-relaxed text-gray-700"
-                                               dangerouslySetInnerHTML={{__html: item.b}}/>
-                                            <p className="text-xs text-gray-500 mt-2">{item.f}</p>
-                                        </div>
-                                    ))}
-                                </div>
-                                <div className="space-y-5">
-                                    {secondCol.map(item => (
-                                        <div key={item.t}>
-                                            <h4 className="text-sm font-medium tracking-wide uppercase text-gray-600 mb-2">{item.t}</h4>
-                                            <p className="text-sm md:text-base leading-relaxed text-gray-700"
-                                               dangerouslySetInnerHTML={{__html: item.b}}/>
-                                            <p className="text-xs text-gray-500 mt-2">{item.f}</p>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </section>
-                        {/* Studies */}
-                        <section className="space-y-6" aria-labelledby="sec-studies">
-                            <h3 id="sec-studies"
-                                className="font-outfit text-2xl md:text-3xl font-semibold tracking-tight text-gray-900">{c.studiesHeading}</h3>
+                                className="font-outfit text-2xl md:text-3xl font-semibold tracking-tight text-gray-900 border-b pb-4">{c.tipsHeading}</h3>
                             <div className="space-y-8">
-                                {c.studies.map(s => (
-                                    <div key={s.t}
-                                         className="rounded-xl border border-gray-300/70 bg-white p-6 space-y-3">
-                                        <h4 className="text-sm font-medium tracking-wide uppercase text-gray-600">{s.t}</h4>
-                                        <p className="text-sm md:text-base leading-relaxed text-gray-700"
-                                           dangerouslySetInnerHTML={{__html: s.d}}/>
+                                {c.tips.map(item => (
+                                    <div key={item.t}>
+                                        <h4 className="text-lg font-semibold text-gray-800 mb-2">{item.t}</h4>
+                                        <div className="space-y-4 text-base leading-relaxed text-gray-700">
+                                            <p dangerouslySetInnerHTML={{__html: item.b}}/>
+                                            <p className="text-sm text-gray-500 border-l-2 border-gray-200 pl-4">{item.f}</p>
+                                        </div>
                                     </div>
                                 ))}
                             </div>
-                            <p className="text-sm md:text-base leading-relaxed text-gray-700"
+                        </section>
+
+                        {/* Studies Section */}
+                        <section className="space-y-8" aria-labelledby="sec-studies">
+                            <h3 id="sec-studies"
+                                className="font-outfit text-2xl md:text-3xl font-semibold tracking-tight text-gray-900 border-b pb-4">{c.studiesHeading}</h3>
+                            <div className="space-y-6">
+                                {c.studies.map(s => (
+                                    <blockquote key={s.t}
+                                                className="p-6 rounded-xl border border-gray-200/80 bg-gray-50/80">
+                                        <h4 className="text-base font-semibold text-gray-800 mb-2">{s.t}</h4>
+                                        <p className="text-base leading-relaxed text-gray-700"
+                                           dangerouslySetInnerHTML={{__html: s.d}}/>
+                                    </blockquote>
+                                ))}
+                            </div>
+                            <p className="text-base leading-relaxed text-gray-800 font-medium"
                                dangerouslySetInnerHTML={{__html: c.studiesSummary}}/>
                         </section>
-                        {/* Checklist */}
+
+                        {/* Checklist Section */}
                         <section className="space-y-6" aria-labelledby="sec-checklist">
                             <h3 id="sec-checklist"
-                                className="font-outfit text-2xl md:text-3xl font-semibold tracking-tight text-gray-900">{c.checklistHeading}</h3>
-                            <ul className="grid md:grid-cols-2 gap-4 list-none p-0 m-0">
+                                className="font-outfit text-2xl md:text-3xl font-semibold tracking-tight text-gray-900 border-b pb-4">{c.checklistHeading}</h3>
+                            <ul className="grid md:grid-cols-2 gap-x-8 gap-y-3 list-none p-0 m-0">
                                 {c.checklist.map(item => (
                                     <li key={item}
-                                        className="flex items-start gap-3 text-sm md:text-base text-gray-700"><span
-                                        className="mt-1 inline-block w-2 h-2 rounded-full bg-gray-900"/> {item}</li>
+                                        className="flex items-center gap-3 text-base text-gray-900 px-2 py-2 rounded hover:bg-gray-50 focus:bg-gray-50"
+                                        tabIndex={0}>
+                                        <svg className="w-4 h-4 text-green-700 flex-shrink-0" aria-hidden="true"
+                                             focusable="false" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fillRule="evenodd"
+                                                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                                  clipRule="evenodd"/>
+                                        </svg>
+                                        <span className="text-gray-900">{item}</span>
+                                    </li>
                                 ))}
                             </ul>
                         </section>
-                        {/* Aside */}
-                        <aside className="mt-4 p-7 rounded-2xl bg-gray-900 text-white space-y-4"
-                               aria-label="Automation note">
-                            <h3 className="text-lg font-medium">{c.asideTitle}</h3>
-                            <p className="text-sm leading-relaxed text-gray-200"
-                               dangerouslySetInnerHTML={{__html: c.asideBody}}/>
-                            <a href="/"
-                               className="inline-flex rounded-full bg-white text-gray-900 text-xs font-medium px-6 py-2 hover:bg-gray-100 transition">{c.asideCTA}</a>
+
+                        {/* Promotional Aside/Conclusion */}
+                        <aside className="mt-12 pt-10 border-t border-gray-200/70" aria-label="Automation note">
+                            <h3 className="font-outfit text-2xl md:text-3xl font-semibold tracking-tight text-gray-900">{c.asideTitle}</h3>
+                            <div className="mt-4 space-y-4 text-base leading-relaxed text-gray-700">
+                                <p>{c.asideBody}</p>
+                                <p>{c.footerNote} <a href="/" className="underline hover:text-blue-600">{c.asideCTA}</a>.
+                                </p>
+                            </div>
                         </aside>
-                        <footer className="pt-8 border-t border-gray-200/70">
-                            <p className="text-sm text-gray-600">{c.footerNote}</p>
-                        </footer>
                     </article>
                 </div>
             </div>
