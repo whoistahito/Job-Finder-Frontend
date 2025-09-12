@@ -23,8 +23,8 @@ const content = {
             },
             {
                 t: '3. Mehrere Kanäle parallel',
-                b: 'Nutze Jobbörsen, stelle Alerts ein, versende Initiativbewerbungen und teste ähnliche Jobtitel. Alerts helfen, früh zu reagieren — oft wichtiger als perfekte Passung.',
-                f: 'Tipp: Probiere verwandte Jobtitel, wenn nichts exakt passt.'
+                b: 'Nutze Jobbörsen, stelle Alerts ein, versende Initiativbewerbungen und teste ähnliche Jobtitel. Alerts helfen, früh zu reagieren — oft wichtiger als perfekte Passung. Ziehe auch spezialisierte Suchdienste oder semantische Monitore (z. B. yourjobfinder) in Betracht, die Ergebnisse bündeln und dir nur passende Rollen anzeigen — das spart Zeit und schützt deinen Fokus fürs Bewerben.',
+                f: 'Tipp: Probiere verwandte Jobtitel, wenn nichts exakt passt, oder nutze einen Monitor, um Rauschen zu reduzieren.'
             },
             {
                 t: '4. Ziele & Routine festlegen',
@@ -101,8 +101,8 @@ const content = {
             },
             {
                 t: '3. Search on Several Channels',
-                b: 'Use job boards, set alerts, try speculative applications and test nearby job titles. Alerts help you apply early—often that matters more than a perfect fit.',
-                f: 'Tip: Try a couple of related job titles if nothing matches exactly.'
+                b: 'Use job boards, set alerts, try speculative applications and test nearby job titles. Alerts help you apply early—often that matters more than a perfect fit. Consider also using a focused search engine or a semantic monitor (for example, yourjobfinder) that aggregates results and only surfaces roles that match your criteria—this saves time and preserves focus for applying.',
+                f: 'Tip: Try a couple of related job titles if nothing matches exactly, or use a focused monitor to reduce noise.'
             },
             {
                 t: '4. Set Clear Goals & Routines',
@@ -166,8 +166,6 @@ export const Blog: React.FC = () => {
     const autoLang = useMemo<'de' | 'en'>(() => (typeof navigator !== 'undefined' && navigator.language?.toLowerCase().startsWith('de') ? 'de' : 'en'), []);
     const [lang, setLang] = useState<'de' | 'en'>(autoLang);
     const c = content[lang];
-    const firstCol = c.tips.slice(0, 4);
-    const secondCol = c.tips.slice(4);
     return (
         <main className="soft-ui min-h-screen flex flex-col" lang={lang}>
             <SEO
