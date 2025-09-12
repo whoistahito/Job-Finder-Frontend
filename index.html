@@ -7,16 +7,85 @@
       <link rel="icon" type="image/png" sizes="64x64" href="/src/assets/J-Puzzle-64.png"/>
       <link rel="icon" type="image/png" sizes="180x180" href="/src/assets/J-Puzzle-180.png"/>
       <link rel="apple-touch-icon" sizes="180x180" href="/src/assets/J-Puzzle-180.png"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description"
-          content="Your Job Finder:Our bot finds jobs that match your criteria and emails them to you every day."/>
+
+      <!-- SEO: title + description (improved) -->
+      <title>Your Job Finder — AI-powered job aggregation & personalized matches</title>
+      <meta name="description"
+            content="Your Job Finder aggregates job listings from public platforms like Indeed and LinkedIn and uses AI to surface job opportunities tailored to your profile. Get daily, relevant job matches delivered to your inbox."/>
+      <meta name="keywords"
+            content="job search, job aggregator, AI job matching, Indeed jobs, LinkedIn jobs, remote jobs, developer jobs, career, job alerts"/>
+      <meta name="author" content="Your Job Finder"/>
+      <meta name="robots" content="index, follow"/>
+      <link rel="canonical" href="https://yourjobfinder.website/"/>
+      <link rel="manifest" href="/manifest.json"/>
+      <link rel="alternate" hreflang="en" href="https://yourjobfinder.website/"/>
+
+      <!-- Open Graph -->
+      <meta property="og:type" content="website"/>
+      <meta property="og:site_name" content="Your Job Finder"/>
+      <meta property="og:title" content="Your Job Finder — AI-powered job aggregation & personalized matches"/>
+      <meta property="og:description"
+            content="Aggregating job listings from platforms like Indeed and LinkedIn and using AI to match jobs to your profile — get daily, relevant job alerts."/>
+      <meta property="og:image" content="https://yourjobfinder.website/src/assets/J-Puzzle-180.png"/>
+      <meta property="og:url" content="https://yourjobfinder.website/"/>
+      <meta property="og:locale" content="en_US"/>
+
+      <!-- Twitter Card -->
+      <meta name="twitter:card" content="summary_large_image"/>
+      <meta name="twitter:site" content="@YourJobFinder"/>
+      <meta name="twitter:title" content="Your Job Finder — AI-powered job aggregation & personalized matches"/>
+      <meta name="twitter:description"
+            content="Aggregating job listings from platforms like Indeed and LinkedIn and using AI to match jobs to your profile — get daily, relevant job alerts."/>
+      <meta name="twitter:image" content="https://yourjobfinder.website/src/assets/J-Puzzle-180.png"/>
+
+      <!-- Theme color (mobile browsers) -->
+      <meta name="theme-color" content="#0ea5a4"/>
+
+      <!-- Structured Data (JSON-LD): Organization + WebSite with SearchAction. Update URLs to your production domain. Added ContactPoint. -->
+      <script type="application/ld+json">
+          {
+              "@context": "https://schema.org",
+              "@graph": [
+                  {
+                      "@type": "Organization",
+                      "name": "Your Job Finder",
+                      "url": "https://yourjobfinder.website/",
+                      "logo": "https://yourjobfinder.website/src/assets/J-Puzzle-180.png",
+                      "contactPoint": [
+                          {
+                              "@type": "ContactPoint",
+                              "telephone": "+1-555-555-5555",
+                              "contactType": "customer support",
+                              "email": "your.job.finder.app@gmail.com",
+                              "areaServed": "DE, US, CA, UK",
+                              "availableLanguage": [
+                                  "English",
+                                  "German"
+                              ]
+                          }
+                      ]
+                  },
+                  {
+                      "@type": "WebSite",
+                      "url": "https://yourjobfinder.website/",
+                      "name": "Your Job Finder",
+                      "potentialAction": {
+                          "@type": "SearchAction",
+                          "target": "https://yourjobfinder.website/search?q={search_term_string}",
+                          "query-input": "required name=search_term_string"
+                      }
+                  }
+              ]
+          }
+      </script>
+
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
           as="style">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;600;800&display=swap"
           rel="stylesheet">
-    <title>Your Job Finder</title>
     <style>
       /* Updated critical CSS */
       body {

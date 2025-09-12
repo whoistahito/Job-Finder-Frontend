@@ -1,0 +1,11 @@
+# robots.txt for Your Job Finder
+Sitemap: https://yourjobfinder.website/sitemap.xml
+
+User-agent: *
+# Allow crawler access to public site and assets
+Allow: /
+# Block user account and admin/staging paths
+Disallow: /api/
+
+# If you have other private API endpoints, list them here
+

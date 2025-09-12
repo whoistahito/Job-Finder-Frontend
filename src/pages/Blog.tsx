@@ -1,5 +1,6 @@
 import React, {useMemo, useState} from 'react';
 import {Footer} from '../components/Footer';
+import SEO from '../components/SEO';
 
 // Provide structured bilingual content (no markdown) and reuse layout
 const content = {
@@ -169,6 +170,13 @@ export const Blog: React.FC = () => {
     const secondCol = c.tips.slice(4);
     return (
         <main className="soft-ui min-h-screen flex flex-col" lang={lang}>
+            <SEO
+                title={lang === 'de' ? `${c.heroTitle} — Your Job Finder` : `${c.heroTitle} — Your Job Finder`}
+                description={lang === 'de' ? c.heroLead : c.heroLead}
+                url={`https://yourjobfinder.website/blog`}
+                image={`https://yourjobfinder.website/src/assets/J-Puzzle-180.png`}
+                keywords={`job search, job tips, job finder, career, your job finder`}
+            />
             {/* Hero */}
             <section className="relative border-b border-gray-300/60 dot-grid-bg overflow-hidden">
                 <div className="relative max-w-6xl mx-auto px-6 pt-24 pb-24">
