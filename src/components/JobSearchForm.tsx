@@ -95,9 +95,9 @@ export const JobSearchForm: React.FC = () => {
               <div className="dot-cluster"/>
               <div className="relative max-w-6xl mx-auto px-6 pt-24 pb-32 md:pb-40">
                   <div className="max-w-4xl animate-fade-in-up">
-                      <h1 className="heading-xl text-gray-900">Let us find your job</h1>
-                      <p className="mt-10 subcopy max-w-2xl">Tell us your skills, the role and location you want. We
-                          send at most one precise email only when a job fits.</p>
+                      <h1 className="heading-xl text-gray-900">Job Search on Autopilot</h1>
+                      <p className="mt-10 subcopy max-w-2xl">Tell us what you want—skills, role, location. We'll spare
+                          your inbox and only send a single, relevant email when a job actually fits. No spam. Ever.</p>
                       <div className="mt-12 flex flex-wrap gap-4">
                           <button onClick={() => {
                               const el = document.getElementById('subscription-form');
@@ -280,12 +280,15 @@ export const JobSearchForm: React.FC = () => {
                                   <h2>How it works</h2>
                                   <div className="stack-line"/>
                                   <div className="stack-grid">
-                                      {[{t: 'Define', d: 'Tell us the role & boundaries that matter.'}, {
-                                          t: 'Monitor',
-                                          d: 'We continuously watch credible sources.'
-                                      }, {t: 'Filter', d: 'Noise & weak matches are removed upstream.'}, {
-                                          t: 'Deliver',
-                                          d: 'Only a concise email when a real fit appears.'
+                                      {[{t: 'You Define', d: 'Tell us your ideal role, location, and skills.'}, {
+                                          t: 'We Scan',
+                                          d: 'We constantly search hundreds of job sites for you.'
+                                      }, {
+                                          t: 'We Filter',
+                                          d: 'We use AI to find you a job that matches your profile.'
+                                      }, {
+                                          t: 'You Get Notified',
+                                          d: 'You get a simple email only when there’s a perfect match.'
                                       }].map(s => (
                                   <div key={s.t} className="stack-grid-item">
                                       <h3>{s.t}</h3>
@@ -299,17 +302,17 @@ export const JobSearchForm: React.FC = () => {
                                   <div className="stack-line"/>
                                   <div className="stack-benefits">
                                       {[{
-                                          title: 'Your Privacy Matters',
-                                          desc: 'Your data stays private. We never sell or rent your personal information.'
+                                          title: 'Privacy First',
+                                          desc: 'Your data is yours. We never share or sell it to anyone.'
                                       }, {
-                                          title: 'AI‑Powered Matching',
-                                          desc: 'Semantics > keywords: We look at job titles and requirements to find a job that fits.'
+                                          title: 'Smarter Matching',
+                                          desc: 'Our AI understands what you want, going beyond simple keywords to find the right fit.'
                                       }, {
-                                          title: 'Daily Email Updates',
-                                          desc: 'At most one clean email per day, No Spam or Ads.'
+                                          title: 'Zero Spam',
+                                          desc: 'You get one daily email at most, and only if there’s a match. No ads, ever.'
                                       }, {
-                                          title: 'Easy Unsubscribe',
-                                          desc: 'Instant one-click unsubscribe in every email. Without any Questions.'
+                                          title: 'One-Click Unsubscribe',
+                                          desc: 'Leave anytime with a single click in any email. No questions asked.'
                                       }].map((b, i) => (
                                           <div key={b.title} className="stack-benefit">
                                               <div className="stack-badge">{String(i + 1).padStart(2, '0')}</div>
