@@ -1,5 +1,5 @@
 import React from 'react';
-import {ArrowLeft, Bot, Mail, Megaphone, ShieldQuestion} from 'lucide-react';
+import {ArrowLeft, Mail, Megaphone, ShieldQuestion} from 'lucide-react';
 import {Button} from './ui/Button';
 import {Link} from 'react-router-dom';
 
@@ -37,8 +37,7 @@ export const ContactUs: React.FC = () => {
                     <div className="relative z-10 px-8 md:px-16 py-16 md:py-20">
                         <div className="flex flex-wrap items-center gap-2 mb-6">
                             <span
-                                className="inline-flex items-center gap-2 bg-gray-900 text-white text-[11px] font-semibold tracking-wide uppercase rounded-full px-4 py-1.5"><Bot
-                                className="w-3.5 h-3.5"/> Contact</span>
+                                className="inline-flex items-center gap-2 bg-gray-900 text-white text-[11px] font-semibold tracking-wide uppercase rounded-full px-4 py-1.5">Contact</span>
                             <span
                                 className="inline-flex items-center gap-1 bg-brand-600/10 text-brand-700 ring-1 ring-brand-600/25 text-[11px] font-medium tracking-wide uppercase rounded-full px-3 py-1">Avg reply <span
                                 className="font-semibold">&lt;24h</span></span>
