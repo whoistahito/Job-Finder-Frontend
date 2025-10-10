@@ -1,4 +1,3 @@
-import React from 'react';
 import {Route, Routes} from 'react-router-dom';
 import {JobSearchForm} from './components/JobSearchForm';
 import {Unsubscribe} from "./pages/Unsubscribe.tsx";
@@ -7,6 +6,7 @@ import {UnsubscribeHandler} from "./pages/UnsubscribeHandler.tsx";
 import {ContactUs} from "./components/ContactUs.tsx";
 import {TermsOfUse} from "./components/TermsOfUse.tsx";
 import Blog from './pages/Blog';
+import Poster from './pages/Poster';
 
 function App() {
     return (
@@ -18,6 +18,7 @@ function App() {
             <Route path="/unsubscribe/error" element={<UnsubscribeError/>}/>
             <Route path="/terms" element={<TermsOfUse/>}/>
             <Route path="/contact" element={<ContactUs/>}/>
+            <Route path="/poster" element={<Poster/>}/>
         </Routes>
     );
 }
