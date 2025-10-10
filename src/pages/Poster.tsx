@@ -1,6 +1,6 @@
 import {useMemo, useRef, useState} from 'react';
 import {toPng} from 'html-to-image';
-import profilePic from '../assets/qr-code-lack.svg';
+import {QRCodeSVG} from 'qrcode.react';
 
 /**
  * Poster / Flyer preview and export page
@@ -36,15 +36,16 @@ export default function Poster() {
                 backgroundColor: '#ffffff',
                 skipFonts: true,
                 style: {width: `${selected.w}px`, height: `${selected.h}px`, backgroundColor: '#ffffff'},
-                onClone: (cloned: HTMLElement) => {
-                    const doc = cloned.ownerDocument;
+                onClone: (cloned: Document) => {
+                    const doc = cloned;
                     if (!doc) return;
                     const style = doc.createElement('style');
                     style.textContent = `*{font-family: system-ui, -apple-system, \"Segoe UI\", Roboto, Arial, sans-serif !important;}`;
                     doc.head.appendChild(style);
                     // Remove cross-origin font links if any leaked into the clone
                     doc.querySelectorAll('link[rel="stylesheet"]').forEach((lnk) => {
-                        if (lnk.href.includes('fonts.googleapis.com')) lnk.parentElement?.removeChild(lnk);
+                        const link = lnk as HTMLLinkElement;
+                        if (link.href.includes('fonts.googleapis.com')) link.parentElement?.removeChild(link);
                     });
                 },
             } as any);
@@ -123,64 +124,110 @@ export default function Poster() {
                                 <div className="flex items-center justify-between gap-6">
                                     <div className="flex items-center gap-4">
                                         <div
-                                            className="h-14 w-14 rounded-2xl bg-white/70 ring-1 ring-white/70 shadow-[0_2px_8px_rgba(0,0,0,0.06)] flex items-center justify-center">
-                                            <span className="text-xl font-bold text-brand-600">J</span>
+                                            className="h-12 w-12 rounded-2xl bg-white/70 ring-1 ring-white/70 shadow-[0_2px_8px_rgba(0,0,0,0.06)] flex items-center justify-center">
+                                            <span className="text-xl font-bold text-gray-900">J</span>
                                         </div>
                                         <div className="leading-tight">
-                                            <p className="text-[11px] uppercase tracking-[0.2em] text-gray-500">Your Job
+                                            <p className="text-[10px] uppercase tracking-[0.2em] text-gray-500">Your Job
                                                 Finder</p>
-                                            <p className="text-sm text-gray-700">Autopilot job monitoring</p>
+                                            <p className="text-xs text-gray-700 font-medium">Job Search on Autopilot</p>
                                         </div>
-                                    </div>
-                                    <div className="text-right">
-                                        <p className="text-[11px] uppercase tracking-wider text-gray-500">yourjobfinder.website</p>
                                     </div>
                                 </div>
 
                                 {/* Hero */}
-                                <div
-                                    className="mt-[clamp(16px,2vw,24px)] flex-1 grid grid-cols-12 gap-[clamp(16px,2.2vw,26px)] items-center">
-                                    <div className="col-span-7 flex flex-col gap-4">
-                                        <h2 className="font-semibold tracking-[-0.02em] leading-[0.95] text-gray-900"
-                                            style={{fontSize: 'clamp(44px,6.2vw,96px)'}}>
-                                            Job search on autopilot
+                                <div className="mt-[clamp(20px,3vw,32px)] flex-1 flex flex-col justify-between">
+                                    <div className="space-y-[clamp(18px,2.5vw,32px)]">
+                                        <h2 className="font-semibold tracking-[-0.02em] leading-[1.05] text-gray-900"
+                                            style={{fontSize: 'clamp(42px,5.5vw,88px)'}}>
+                                            Job Search<br/>
+                                            on Autopilot
                                         </h2>
-                                        <p className="text-gray-700 text-[clamp(14px,1.3vw,18px)] leading-relaxed max-w-[38ch]">
-                                            Tell us your ideal role, skills and location. We scan sources continuously
-                                            and email you only
-                                            when a real match appears. No spam. Ever.
+                                        <p className="text-gray-700 text-[clamp(15px,1.4vw,20px)] leading-relaxed max-w-[42ch]">
+                                            Tell us what you want—skills, role, location. We'll spare your inbox and
+                                            only send a single, relevant email when a job actually fits.
                                         </p>
-                                        <div className="mt-2 grid grid-cols-2 gap-2 max-w-md">
-                                            {["Define", "Monitor", "Filter", "Notify"].map((k, i) => (
-                                                <div key={k}
-                                                     className="flex items-center gap-2 rounded-xl bg-white/75 border border-gray-300/70 px-3 py-2">
+
+                                        {/* Minimalist feature list */}
+                                        <div className="space-y-3 max-w-lg">
+                                            {[
+                                                {num: "01", text: "Define your ideal role & criteria"},
+                                                {num: "02", text: "We monitor job boards 24/7"},
+                                                {num: "03", text: "Get notified of perfect matches"},
+                                                {num: "04", text: "No spam. Ever."}
+                                            ].map((item) => (
+                                                <div key={item.num} className="flex items-center gap-3">
                                                     <div
-                                                        className="w-6 h-6 rounded-full bg-gray-900 text-white flex items-center justify-center text-[11px] font-medium">{String(i + 1).padStart(2, '0')}</div>
-                                                    <span className="text-sm text-gray-800">{k}</span>
+                                                        className="w-8 h-8 rounded-full bg-white/75 ring-1 ring-gray-300/70 flex items-center justify-center flex-shrink-0">
+                                                        <span
+                                                            className="text-[10px] font-medium text-gray-700">{item.num}</span>
+                                                    </div>
+                                                    <span
+                                                        className="text-[clamp(12px,1.1vw,15px)] text-gray-700">{item.text}</span>
                                                 </div>
                                             ))}
                                         </div>
                                     </div>
 
-                                    {/* Profile image */}
-                                    <div className="col-span-5 flex items-center justify-center">
-                                        <div className="relative">
-                                            <div
-                                                className="absolute -inset-1 rounded-[28px] bg-gradient-to-br from-brand-400/35 via-cyan-400/30 to-transparent blur-xl"/>
-                                            <img src={profilePic} alt="Profile" onLoad={() => setImgReady(true)}
-                                                 onError={() => setImgReady(false)}
-                                                 className="relative rounded-[28px] w-full h-auto max-h-[520px] object-cover shadow-[0_18px_48px_-12px_rgba(0,0,0,0.25)] border border-white"/>
+                                    {/* QR Code Section - Glassmorphic card */}
+                                    <div className="mt-[clamp(24px,3vw,40px)]">
+                                        <div
+                                            className="relative rounded-2xl bg-white/60 backdrop-blur-sm border border-gray-300/60 shadow-[0_8px_32px_rgba(0,0,0,0.06)] p-[clamp(20px,2.5vw,32px)]"
+                                            ref={(el) => {
+                                                if (el && !imgReady) setImgReady(true);
+                                            }}
+                                        >
+                                            <div className="flex items-center justify-between gap-6">
+                                                <div className="flex-1">
+                                                    <h3 className="text-[clamp(16px,1.6vw,24px)] font-semibold text-gray-900 mb-2">
+                                                        Start monitoring jobs today
+                                                    </h3>
+                                                    <p className="text-[clamp(12px,1.1vw,15px)] text-gray-600 mb-3">
+                                                        Scan the QR code to get started
+                                                    </p>
+                                                    <div
+                                                        className="text-[clamp(13px,1.2vw,17px)] font-medium text-gray-900">
+                                                        www.yourjobfinder.website
+                                                    </div>
+                                                    <div
+                                                        className="mt-4 flex flex-wrap gap-2 text-[10px] text-gray-600">
+                                                        <span className="inline-flex items-center gap-1">
+                                                            <span className="w-1.5 h-1.5 rounded-full bg-gray-400"/>
+                                                            Privacy first
+                                                        </span>
+                                                        <span className="inline-flex items-center gap-1">
+                                                            <span className="w-1.5 h-1.5 rounded-full bg-gray-400"/>
+                                                            Zero spam
+                                                        </span>
+                                                        <span className="inline-flex items-center gap-1">
+                                                            <span className="w-1.5 h-1.5 rounded-full bg-gray-400"/>
+                                                            One-click unsubscribe
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div className="flex-shrink-0">
+                                                    <div
+                                                        className="relative bg-white p-3 rounded-xl shadow-sm ring-1 ring-gray-200">
+                                                        <QRCodeSVG
+                                                            value="https://www.yourjobfinder.website"
+                                                            size={selected.key === 'social' ? 140 : selected.key === 'letter150' ? 180 : 240}
+                                                            level="H"
+                                                            style={{display: 'block'}}
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
 
                                 {/* Footer strip */}
-                                <div className="mt-[clamp(14px,2vw,28px)]">
+                                <div className="mt-[clamp(14px,2vw,20px)]">
                                     <div
                                         className="h-px w-full bg-gradient-to-r from-transparent via-gray-300 to-transparent"/>
-                                    <div className="pt-3 flex items-center justify-between text-[12px] text-gray-600">
-                                        <span>Privacy first · Zero spam · One‑click unsubscribe</span>
-                                        <span>Scan • Match • Deliver</span>
+                                    <div className="pt-3 flex items-center justify-between text-[10px] text-gray-500">
+                                        <span>© 2025 Your Job Finder</span>
+                                        <span>Educational project</span>
                                     </div>
                                 </div>
                             </div>
