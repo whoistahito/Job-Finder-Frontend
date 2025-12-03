@@ -8,6 +8,7 @@ export interface FormData {
     email: string;
     skills: string[]; // new
     education: string[]; // new
+    experience: string[]; // new
 }
 
 export interface FormErrors {
@@ -17,6 +18,7 @@ export interface FormErrors {
     email?: string;
     skills?: string; // limit / validation
     education?: string; // limit / validation
+    experience?: string; // limit / validation
 }
 
 export interface Suggestion {
@@ -31,7 +33,8 @@ export const useJobSearch = () => {
         location: '',
         email: '',
         skills: [],
-        education: []
+        education: [],
+        experience: []
     });
     const [formErrors, setFormErrors] = useState<FormErrors>({});
     const [touched, setTouched] = useState<Record<keyof FormData, boolean>>({
@@ -40,7 +43,8 @@ export const useJobSearch = () => {
         location: false,
         email: false,
         skills: false,
-        education: false
+        education: false,
+        experience: false
     });
     const navigate = useNavigate();
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -87,6 +91,9 @@ export const useJobSearch = () => {
                 if (Array.isArray(value) && value.length > 10) return 'Maximum 10 skills';
                 return undefined;
             case 'education':
+                if (Array.isArray(value) && value.length > 3) return 'Maximum 3 entries';
+                return undefined;
+            case 'experience':
                 if (Array.isArray(value) && value.length > 3) return 'Maximum 3 entries';
                 return undefined;
 
@@ -269,7 +276,8 @@ export const useJobSearch = () => {
             location: true,
             email: true,
             skills: true,
-            education: true
+            education: true,
+            experience: true
         });
 
         // Validate all fields before submission
@@ -300,7 +308,15 @@ export const useJobSearch = () => {
             setShowSuccessPopup(true);
 
             // Reset form
-            setFormData({position: '', jobType: '', location: '', email: '', skills: [], education: []});
+            setFormData({
+                position: '',
+                jobType: '',
+                location: '',
+                email: '',
+                skills: [],
+                education: [],
+                experience: []
+            });
             setFormErrors({});
             setTouched({
                 position: false,
@@ -308,7 +324,8 @@ export const useJobSearch = () => {
                 location: false,
                 email: false,
                 skills: false,
-                education: false
+                education: false,
+                experience: false
             });
         } catch (err) {
             console.error(err);
@@ -405,6 +422,34 @@ export const useJobSearch = () => {
         }
     };
 
+    const addExperience = (raw: string) => {
+        const entry = raw.trim();
+        if (!entry) return;
+        setFormData(prev => {
+            if (prev.experience.length >= 3 || prev.experience.some(e => e.toLowerCase() === entry.toLowerCase())) return prev;
+            return {...prev, experience: [...prev.experience, entry]};
+        });
+        setFormErrors(prev => ({...prev, experience: undefined}));
+    };
+
+    const removeExperience = (entry: string) => {
+        setFormData(prev => ({...prev, experience: prev.experience.filter(e => e !== entry)}));
+    };
+
+    const handleExperienceKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (['Enter', 'Tab'].includes(e.key)) {
+            e.preventDefault();
+            const target = e.target as HTMLInputElement;
+            addExperience(target.value);
+            target.value = '';
+        } else if (e.key === 'Backspace') {
+            const target = e.target as HTMLInputElement;
+            if (!target.value && formData.experience.length) {
+                removeExperience(formData.experience[formData.experience.length - 1]);
+            }
+        }
+    };
+
     return {
         formData,
         formErrors,
@@ -430,6 +475,9 @@ export const useJobSearch = () => {
         addEducation,
         removeEducation,
         handleSkillKeyDown,
-        handleEducationKeyDown
+        handleEducationKeyDown,
+        addExperience,
+        removeExperience,
+        handleExperienceKeyDown
     };
 };

@@ -33,12 +33,16 @@ export const JobSearchForm: React.FC = () => {
       addEducation,
       removeEducation,
       handleSkillKeyDown,
-      handleEducationKeyDown
+      handleEducationKeyDown,
+      addExperience,
+      removeExperience,
+      handleExperienceKeyDown
   } = useJobSearch();
 
     // Local UI only state for progressive disclosure of quick-add chips
     const [showSkillExamples, setShowSkillExamples] = useState(false);
     const [showEducationExamples, setShowEducationExamples] = useState(false);
+    const [showExperienceExamples, setShowExperienceExamples] = useState(false);
 
     const stackRef = useRef<HTMLDivElement | null>(null);
 
@@ -157,7 +161,8 @@ export const JobSearchForm: React.FC = () => {
                           <div className="md:col-span-2 space-y-3">
                               <div className="flex flex-col gap-1">
                                   <div className="flex items-center gap-3 flex-wrap">
-                                      <label className="tag-meta" htmlFor="skills-input">Key Skills (up to 10)</label>
+                                      <label className="tag-meta font-semibold" htmlFor="skills-input">What are your key
+                                          skills? (up to 10)</label>
                                       <button type="button" className="chip-toggle"
                                               onClick={() => setShowSkillExamples(s => !s)}>
                                           {showSkillExamples ? 'Hide quick adds' : 'Show quick adds'}
@@ -211,8 +216,8 @@ export const JobSearchForm: React.FC = () => {
                           <div className="md:col-span-2 space-y-3">
                               <div className="flex flex-col gap-1">
                                   <div className="flex items-center gap-3 flex-wrap">
-                                      <label className="tag-meta" htmlFor="education-input">Education / Certifications
-                                          (max 3)</label>
+                                      <label className="tag-meta font-semibold" htmlFor="education-input">What education
+                                          do you have? (max 3)</label>
                                       <button type="button" className="chip-toggle"
                                               onClick={() => setShowEducationExamples(s => !s)}>
                                           {showEducationExamples ? 'Hide quick adds' : 'Show quick adds'}
@@ -220,8 +225,8 @@ export const JobSearchForm: React.FC = () => {
                                       {formErrors.education && <span
                                           className="text-[11px] text-red-500 ml-auto">{formErrors.education}</span>}
                                   </div>
-                                  <p className="micro-hint" id="education-hint">Highest degree or relevant certification
-                                      (e.g. BSc Computer Science). Keep it concise.</p>
+                                  <p className="micro-hint" id="education-hint">Add your highest degree or relevant
+                                      certifications (e.g. BSc Computer Science, AWS Certified). Keep it concise.</p>
                               </div>
                               <div className="token-field" aria-describedby="education-hint">
                                   {formData.education.map(entry => (
@@ -251,6 +256,61 @@ export const JobSearchForm: React.FC = () => {
                                                   type="button"
                                                   key={ex}
                                                   onClick={() => addEducation(ex)}
+                                                  disabled={added}
+                                                  className="example-chip"
+                                                  aria-pressed={added}
+                                                  role="listitem"
+                                              >{ex}</button>
+                                          );
+                                      })}
+                                  </div>
+                              )}
+                          </div>
+                          {/* Experience Token Field */}
+                          <div className="md:col-span-2 space-y-3">
+                              <div className="flex flex-col gap-1">
+                                  <div className="flex items-center gap-3 flex-wrap">
+                                      <label className="tag-meta font-semibold" htmlFor="experience-input">What work
+                                          experience do you have? (max 3)</label>
+                                      <button type="button" className="chip-toggle"
+                                              onClick={() => setShowExperienceExamples(s => !s)}>
+                                          {showExperienceExamples ? 'Hide quick adds' : 'Show quick adds'}
+                                      </button>
+                                      {formErrors.experience && <span
+                                          className="text-[11px] text-red-500 ml-auto">{formErrors.experience}</span>}
+                                  </div>
+                                  <p className="micro-hint" id="experience-hint">Add your key previous roles or years of
+                                      experience (e.g. "3 years as Backend Developer", "Senior Product Manager"). Keep
+                                      it concise.</p>
+                              </div>
+                              <div className="token-field" aria-describedby="experience-hint">
+                                  {formData.experience.map(entry => (
+                                      <span key={entry} className="tag-badge">
+                        {entry}
+                                          <button type="button" aria-label={`Remove ${entry}`}
+                                                  onClick={() => removeExperience(entry)}>&times;</button>
+                      </span>
+                                  ))}
+                                  {formData.experience.length < 3 && (
+                                      <input
+                                          id="experience-input"
+                                          type="text"
+                                          aria-label="Add experience"
+                                          placeholder={formData.experience.length === 0 ? 'Type & hit Enter' : 'Add another'}
+                                          onKeyDown={handleExperienceKeyDown}
+                                          className="tag-input"
+                                      />
+                                  )}
+                              </div>
+                              {showExperienceExamples && (
+                                  <div className="example-chips" role="list" aria-label="Quick add experience">
+                                      {['2 years as Frontend Developer', '5+ years Backend Engineer', 'Trainee as Product Manager', 'internship Data Analyst'].map(ex => {
+                                          const added = formData.experience.some(s => s.toLowerCase() === ex.toLowerCase());
+                                          return (
+                                              <button
+                                                  type="button"
+                                                  key={ex}
+                                                  onClick={() => addExperience(ex)}
                                                   disabled={added}
                                                   className="example-chip"
                                                   aria-pressed={added}
