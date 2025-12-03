@@ -163,10 +163,6 @@ export const JobSearchForm: React.FC = () => {
                                   <div className="flex items-center gap-3 flex-wrap">
                                       <label className="tag-meta font-semibold" htmlFor="skills-input">What are your key
                                           skills? (up to 10)</label>
-                                      <button type="button" className="chip-toggle"
-                                              onClick={() => setShowSkillExamples(s => !s)}>
-                                          {showSkillExamples ? 'Hide quick adds' : 'Show quick adds'}
-                                      </button>
                                       {formErrors.skills &&
                                           <span className="text-[11px] text-red-500 ml-auto">{formErrors.skills}</span>}
                                   </div>
@@ -189,6 +185,7 @@ export const JobSearchForm: React.FC = () => {
                                           aria-label="Add skill"
                                           placeholder={formData.skills.length === 0 ? 'Type a skill & hit Enter' : 'Add another skill'}
                                           onKeyDown={handleSkillKeyDown}
+                                          onFocus={() => setShowSkillExamples(true)}
                                           className="tag-input"
                                       />
                                   )}
@@ -218,10 +215,6 @@ export const JobSearchForm: React.FC = () => {
                                   <div className="flex items-center gap-3 flex-wrap">
                                       <label className="tag-meta font-semibold" htmlFor="education-input">What education
                                           do you have? (max 3)</label>
-                                      <button type="button" className="chip-toggle"
-                                              onClick={() => setShowEducationExamples(s => !s)}>
-                                          {showEducationExamples ? 'Hide quick adds' : 'Show quick adds'}
-                                      </button>
                                       {formErrors.education && <span
                                           className="text-[11px] text-red-500 ml-auto">{formErrors.education}</span>}
                                   </div>
@@ -243,6 +236,7 @@ export const JobSearchForm: React.FC = () => {
                                           aria-label="Add education"
                                           placeholder={formData.education.length === 0 ? 'Type & hit Enter' : 'Add another'}
                                           onKeyDown={handleEducationKeyDown}
+                                          onFocus={() => setShowEducationExamples(true)}
                                           className="tag-input"
                                       />
                                   )}
@@ -272,10 +266,6 @@ export const JobSearchForm: React.FC = () => {
                                   <div className="flex items-center gap-3 flex-wrap">
                                       <label className="tag-meta font-semibold" htmlFor="experience-input">What work
                                           experience do you have? (max 3)</label>
-                                      <button type="button" className="chip-toggle"
-                                              onClick={() => setShowExperienceExamples(s => !s)}>
-                                          {showExperienceExamples ? 'Hide quick adds' : 'Show quick adds'}
-                                      </button>
                                       {formErrors.experience && <span
                                           className="text-[11px] text-red-500 ml-auto">{formErrors.experience}</span>}
                                   </div>
@@ -298,6 +288,7 @@ export const JobSearchForm: React.FC = () => {
                                           aria-label="Add experience"
                                           placeholder={formData.experience.length === 0 ? 'Type & hit Enter' : 'Add another'}
                                           onKeyDown={handleExperienceKeyDown}
+                                          onFocus={() => setShowExperienceExamples(true)}
                                           className="tag-input"
                                       />
                                   )}
